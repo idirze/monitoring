@@ -1,0 +1,7 @@
+---
+
+- name: restart jmx_exporter
+  systemd:
+    name: jmx_exporter
+    state: restarted
+  when: jmx_exporter_service_state != 'stopped'

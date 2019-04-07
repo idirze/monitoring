@@ -1,0 +1,4 @@
+---
+netdata_dir: /opt/netdata
+netdata_config_dir: "{{ netdata_dir }}/etc/netdata"
+netdata_install_or_upgrade: true

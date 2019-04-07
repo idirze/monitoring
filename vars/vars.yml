@@ -1,0 +1,129 @@
+---
+
+repo_url: http://10.168.0.45:8089/repository/raw-public/monitoring/prometheus
+prometheus_install_dir: /usr/local/bin
+
+netdata_config:
+  global:
+    history: 7200
+  "plugin:apps":
+    update every: 1
+  "plugin:proc":
+    /proc/net/snmp: "no"
+    /proc/net/snmp6: "no"
+# Configure alert manager
+prometheus_alertmanager_config:
+- scheme: http
+  static_configs:
+    - targets: 
+      - "{{ ansible_host }}:9093"
+# Configure prometheus targets
+prometheus_targets:
+  node:
+  - targets:
+    - localhost:9100
+    labels:
+      env: demosite
+  alertmanager:
+    - targets:
+      - "{{ ansible_host }}:9093"
+      labels:
+        env: demosite
+  grafana:
+    - targets:
+      - "{{ ansible_host }}:3000"
+      labels:
+        env: demosite
+  netdata:
+    - targets:
+      - "localhost:19999"
+      labels:
+        env: demosite
+
+# Prometheus scrap config
+prometheus_scrape_configs:
+- job_name: "prometheus"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9090"
+- job_name: "node"
+  file_sd_configs:
+  - files:
+    - "/etc/prometheus/file_sd/node.yml"
+- job_name: "alertmanager"
+  file_sd_configs:
+  - files:
+    - "/etc/prometheus/file_sd/alertmanager.yml"
+- job_name: "grafana"
+  file_sd_configs:
+  - files:
+    - "/etc/prometheus/file_sd/grafana.yml"
+- job_name: "netdata"
+  scrape_interval: 60s
+  metrics_path: "/api/v1/allmetrics"
+  params:
+    format: ['prometheus']
+  honor_labels: true
+  file_sd_configs:
+  - files:
+    - "/etc/prometheus/file_sd/netdata.yml"
+- job_name: "pushgateway"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9091"
+
+# Configure slack
+alertmanager_external_url: "http://{{ ansible_host }}:9093"
+alertmanager_slack_api_url: "https://hooks.slack.com/services/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"
+alertmanager_receivers:
+- name: slack
+  slack_configs:
+  - send_resolved: true
+    api_url: $slack_api_url
+    channel: '#alerts'
+alertmanager_route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: slack
+
+# Grafana authentication         
+grafana_auth:
+  anonymous:
+    org_name: "Main Org."
+    org_role: Viewer
+
+grafana_security:
+  admin_user: admin
+  admin_password: "admin"
+
+# Grafana datasources
+grafana_datasources:
+- name: prometheus
+  type: prometheus
+  access: proxy
+  url: "http://{{ ansible_host }}:9090"
+  basicAuth: true
+  basicAuthUser: "grafana"
+  basicAuthPassword: "grafana"
+
+# Grafana dashboards
+grafana_dashboards:
+# Node Exporter Full with Hostname
+- name: 'node-exporter-full-with-hostname'
+  dashboard_id: '6212'
+  revision_id: '2'
+  datasource: '{{ grafana_datasources.0.name }}'
+# Prometheus 2.0 Overview
+- name: 'prometheus-2-0-overview'
+  dashboard_id: '3662'
+  revision_id: '2'
+  datasource: '{{ grafana_datasources.0.name }}'
+# Netdata: Netdata dashboards for Grafana via Prometheus.
+- name: 'netdata'
+  dashboard_id: '7107'
+  revision_id: '1'
+  datasource: '{{ grafana_datasources.0.name }}'

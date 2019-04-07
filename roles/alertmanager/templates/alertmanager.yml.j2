@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+
+global:
+  resolve_timeout: {{ alertmanager_resolve_timeout | quote}}
+{% for key, value in alertmanager_smtp.items() %}
+  smtp_{{ key }}: {{ value | quote }}
+{% endfor %}
+templates:
+- '/etc/alertmanager/templates/*.tmpl'
+{% if alertmanager_receivers | length %}
+receivers:
+{{ alertmanager_receivers | to_nice_yaml(indent=2) }}
+{% endif %}
+{% if alertmanager_inhibit_rules | length %}
+inhibit_rules:
+{{ alertmanager_inhibit_rules | to_nice_yaml(indent=2) }}
+{% endif %}
+route:
+  {{ alertmanager_route | to_nice_yaml(indent=2) | indent(2, False) }}
+{% if alertmanager_child_routes | length %}
+  routes:
+  {{ alertmanager_child_routes | to_nice_yaml(indent=2) | indent(2, False) }}
+{% endif %}

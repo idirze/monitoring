@@ -1,0 +1,35 @@
+[Unit]
+Description=Grafana instance
+Documentation=http://docs.grafana.org
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment=GRAFANA_USER={{ grafana_user }}
+Environment=GRAFANA_GROUP={{ grafana_group }}
+Environment=GRAFANA_HOME={{ grafana_home }}
+Environment=LOG_DIR={{ grafana_logs_dir }}
+Environment=DATA_DIR={{ grafana_data_dir }}
+Environment=CONF_DIR={{ grafana_conf_dir }}
+Environment=CONF_FILE=grafana.ini
+Environment=RESTART_ON_UPGRADE={{ grafana_restart_on_update | bool | lower }}
+Environment=PLUGINS_DIR={{ grafana_data_dir }}/plugins
+Environment=PATH=/bin:/usr/bin:/usr/local/bin:{{ grafana_home }}/grafana-{{ grafana_version }}/bin
+User={{ grafana_user }}
+Group={{ grafana_group }}
+Type=simple
+Restart=on-failure
+WorkingDirectory={{ grafana_home }}/grafana-{{ grafana_version }}/
+ExecStart={{ grafana_home }}/grafana-{{ grafana_version }}/bin/grafana-server \
+          --config={{ grafana_conf_dir }}/grafana.ini \
+          --pidfile=/var/run/grafana.pid \
+           cfg:default.paths.logs={{ grafana_logs_dir }} \
+           cfg:default.paths.data={{ grafana_data_dir }} \
+           cfg:default.paths.plugins={{ grafana_data_dir }}/plugins \
+           cfg:default.paths.provisioning={{ grafana_conf_dir }}/provisioning
+
+LimitNOFILE={{ grafana_limit_no_file }}
+TimeoutStopSec={{ grafana_timeout }}
+
+[Install]
+WantedBy=multi-user.target

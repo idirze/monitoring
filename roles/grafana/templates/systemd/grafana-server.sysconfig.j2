@@ -1,0 +1,8 @@
+GRAFANA_GROUP=grafana
+GRAFANA_HOME={{ grafana_home }}
+LOG_DIR={{ grafana_logs_dir }}
+DATA_DIR={{ grafana_data_dir }}
+CONF_DIR={{ grafana_conf_dir }}
+CONF_FILE=grafana.ini
+RESTART_ON_UPGRADE={{ grafana_restart_on_update | bool | lower }}
+PLUGINS_DIR={{ grafana_data_dir }}/plugins

@@ -1,0 +1,54 @@
+---
+
+- name: JMX_EXPORTER | Ensure jmx_exporter group
+  group:
+    name: "{{ jmx_exporter_group }}"
+    system: true
+    state: present
+
+- name: JMX_EXPORTER | Ensure jmx_exporter user
+  user:
+    name: "{{ jmx_exporter_user }}"
+    group: "{{ jmx_exporter_group }}"
+    system: true
+    shell: /usr/sbin/nologin
+    createhome: false
+
+- name: JMX_EXPORTER | Ensure skeleton paths
+  file:
+    dest: "{{ item }}"
+    owner: "{{ jmx_exporter_user }}"
+    group: "{{ jmx_exporter_group }}"
+    state: directory
+  with_items:
+    - "{{ jmx_exporter_root_directory }}"
+    - "{{ jmx_exporter_conf_directory }}"
+    - "{{ jmx_exporter_log_directory }}"
+
+- name: JMX_EXPORTER | Download binary
+  get_url:
+    url: "{{ jmx_exporter_url }}"
+    dest: /tmp
+
+- name: JMX_EXPORTER | Copy binary
+  copy:
+    src: "/tmp/{{ jmx_exporter_bin_name }}"
+    dest: "{{ jmx_exporter_root_directory }}/{{ jmx_exporter_bin_name }}"
+    owner: "{{ jmx_exporter_user }}"
+    group: "{{ jmx_exporter_group }}"
+    remote_src: true
+    mode: 0755
+  notify: restart jmx_exporter
+
+- name: JMX_EXPORTER | Link binary
+  file:
+    src: "{{ jmx_exporter_root_directory }}/{{ jmx_exporter_bin_name }}"
+    dest: "{{ jmx_exporter_jar_path }}"
+    state: link
+
+- name: JMX_EXPORTER | Copy Daemon script
+  template:
+    src: jmx_exporter.service.j2
+    dest: /etc/systemd/system/jmx_exporter.service
+    mode: 0644
+  notify: restart jmx_exporter

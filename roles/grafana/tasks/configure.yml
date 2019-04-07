@@ -1,0 +1,78 @@
+---
+
+- name: Get latest installed Grafana version.
+  shell: ls -l {{ grafana_home }} | grep grafana | sort | head -n 1 | rev | cut -d " " -f 1 | rev
+  register: grafana_installed_version
+  changed_when: False
+
+- name: Ensure directories for Grafana are present.
+  file:
+    path: "{{ item }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    state: directory
+  with_items:
+    - "{{ grafana_logs_dir }}"
+    - "{{ grafana_conf_dir }}"
+    - "{{ grafana_data_dir }}/plugins"
+    - "{{ grafana_data_dir }}/dashboards"
+    - "{{ grafana_conf_dir }}/provisioning/dashboards"
+    - "{{ grafana_conf_dir }}/provisioning/datasources"
+
+- block:
+
+    - name: Ensure Systemd unit file is present.
+      template:
+        src: systemd/grafana.service.j2
+        dest:  /etc/systemd/system/grafana.service
+      register: grafana_unit
+
+    - name: Reload Systemd.
+      systemd:
+        daemon_reload: True
+        name: grafana
+      when: grafana_unit | changed
+
+  when: ansible_service_mgr == 'systemd'
+
+- name: Ensure sysv init script is present.
+  template:
+    src: systemd/grafana-server.sysv.j2
+    dest: /etc/init.d/grafana
+    mode: 0700
+  when: ansible_service_mgr == 'sysv'
+
+- name: Ensure upstart script is present.
+  template:
+    src: systemd/grafana-server.upstart.j2
+    dest: /etc/init/grafana.conf
+    mode: 0700
+  when: ansible_service_mgr == 'upstart'
+
+- name: Ensure Grafana configuration is present.
+  template:
+    src: grafana.ini.j2
+    dest: "{{ grafana_conf_dir }}/grafana.ini"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+  notify: restart grafana
+
+- name: Create grafana LDAP configuration file
+  template:
+    src: ldap.toml.j2
+    dest: "{{ grafana_conf_dir }}/ldap.toml"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    mode: 0640
+  when:
+    - "'ldap' in grafana_auth"
+    - "'enabled' not in grafana_auth.ldap or grafana_auth.ldap.enabled"
+  no_log: true
+  notify: restart grafana
+
+- name: Enable and start Grafana systemd unit
+  systemd:
+    name: grafana
+    enabled: true
+    state: started
+    daemon_reload: true

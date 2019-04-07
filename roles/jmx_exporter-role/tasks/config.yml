@@ -1,0 +1,11 @@
+---
+
+- name: JMX_EXPORTER | Copy exporter config
+  template:
+    src: "{{ jmx_exporter_config_template_path }}"
+    dest: "{{ jmx_exporter_conf_path }}"
+    owner: "{{ jmx_exporter_user }}"
+    group: "{{ jmx_exporter_group }}"
+    mode: 0640
+  notify:
+    - restart jmx_exporter

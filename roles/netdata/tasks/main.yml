@@ -1,0 +1,34 @@
+---
+- name: download Netdata binary installer {{ netdata_download_url }} - {{ repo_url }}
+  get_url:
+    url: "{{ repo_url }}/netdata/netdata-{{ netdata_version }}.gz.run"
+    dest: "{{ netdata_install_dir }}/netdata-{{ netdata_version }}.gz.run"
+    mode: "ugo+x"
+  register: _download_binary
+  until: _download_binary is succeeded
+  retries: 5
+  delay: 2
+  check_mode: false
+
+- name: install Netdata
+  command: "{{ netdata_install_dir }}/netdata-{{ netdata_version }}.gz.run --accept -- {{ netdata_installer_options }}"
+
+- name: configure Netdata
+  template:
+    src: netdata.conf.j2
+    dest: "{{ netdata_config_dir }}/netdata.conf"
+    owner: netdata
+    group: netdata
+  notify: restart netdata
+  when: netdata_config
+
+- name: "create custom fact directory"
+  file:
+    path: "/etc/ansible/facts.d"
+    state: "directory"
+
+- name: "set netdata_version fact"
+  copy:
+    content: "{\"version\":\"{{ netdata_version }}\"}"
+    dest: /etc/ansible/facts.d/netdata.fact
+    mode: 0644

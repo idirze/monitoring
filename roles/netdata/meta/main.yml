@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Andy Shinn
+  description: Netdata binary installer
+  min_ansible_version: 2.0
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+  galaxy_tags:
+    - netdata
+    - binary
+    - monitoring
+dependencies: []

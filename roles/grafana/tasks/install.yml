@@ -1,0 +1,37 @@
+---
+- name: Ensure Grafana group is present.
+  group:
+    name: "{{ grafana_group }}"
+    state: present
+
+- name: Ensure Grafana user is present.
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    system: True
+    state: present
+
+- name: Ensure grafana home exists
+  file:
+    path: "{{ grafana_home }}"
+    state: directory
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+
+- name: Download Grafana release build package archive.
+  get_url:
+    url: "{{ repo_url }}/grafana/grafana-{{ grafana_version }}.linux-amd64.tar.gz"
+    dest: "{{ grafana_home }}"
+
+- name: Unpack Grafana package archive.
+  shell: "cd {{ grafana_home }} && tar xfz grafana-{{ grafana_version }}.linux-amd64.tar.gz"
+
+- name: Set permissions for grafana_home.
+  file:
+    path: "{{ grafana_home }}/grafana-{{ grafana_version }}"
+    state: directory
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    recurse: True
+  changed_when: False
+
