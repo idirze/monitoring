@@ -1,7 +1,12 @@
 ---
 
 repo_url: http://10.168.0.45:8089/repository/raw-public/monitoring/prometheus
-prometheus_install_dir: /usr/local/bin
+
+prometheus_install_dir: /usr/its/monitoring/prometheus
+grafana_home: /usr/its/monitoring/grafana
+grafana_logs_dir: "/var/log/grafana"
+grafana_data_dir: "/var/lib/grafana"
+grafana_conf_dir: /etc/grafana
 
 netdata_config:
   global:
@@ -110,20 +115,39 @@ grafana_datasources:
   basicAuthUser: "grafana"
   basicAuthPassword: "grafana"
 
+- name: Ambari Metrics
+  type: Ambari Metrics
+  access: proxy
+  #url: "http://{{ ansible_host }}:9090"
+  basicAuth: true
+  basicAuthUser: "grafana"
+  basicAuthPassword: "grafana"
+
+# Grafana plugins
+grafana_plugins:
+- "prajwalrao-ambari-metrics-grafana-1.0.1-1-gd429f53"
+
 # Grafana dashboards
 grafana_dashboards:
 # Node Exporter Full with Hostname
-- name: 'node-exporter-full-with-hostname'
+- category: exporters
+  name: 'node-exporter-full-with-hostname'
   dashboard_id: '6212'
   revision_id: '2'
   datasource: '{{ grafana_datasources.0.name }}'
 # Prometheus 2.0 Overview
-- name: 'prometheus-2-0-overview'
+- category: exporters
+  name: 'prometheus-2-0-overview'
   dashboard_id: '3662'
   revision_id: '2'
   datasource: '{{ grafana_datasources.0.name }}'
 # Netdata: Netdata dashboards for Grafana via Prometheus.
-- name: 'netdata'
+- category: exporters
+  name: 'netdata'
   dashboard_id: '7107'
   revision_id: '1'
   datasource: '{{ grafana_datasources.0.name }}'
+# Ambari metrics dashboards
+- category: ams
+  name: all
+

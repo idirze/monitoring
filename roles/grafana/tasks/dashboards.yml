@@ -32,19 +32,27 @@
 
     - name: copy grafana dashboard
       copy:
-        src: "dashboards/{{ item.name }}_rev{{ item.revision_id}}.json"
-        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_rev{{ item.revision_id }}.json"
+        src: "dashboards/{{ item.category }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id}}.json"
+        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id }}.json"
+      when: item.name != "all"
       with_items: 
       - "{{ grafana_dashboards }}"
 
+    - name: copy grafana all dashboard
+      copy:
+        src: "{{ item }}"
+        dest: "{{ _tmp_dashboards.path }}"
+      with_fileglob: 
+      - "dashboards/ams/**"
+
     - name: Set the correct data source name in the dashboard
       replace:
-        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_rev{{ item.revision_id}}.json"
+        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id}}.json"
         regexp: '"(?:\${)?DS_[A-Z0-9_-]+(?:})?"'
         replace: '"{{ item.datasource }}"'
       changed_when: false
+      when: grafana_dashboards | length > 0 and item.name != "all"
       with_items: "{{ grafana_dashboards }}"
-      when: grafana_dashboards | length > 0
 
 - name: Import grafana dashboards through API
   uri:
