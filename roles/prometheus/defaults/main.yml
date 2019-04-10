@@ -4,6 +4,9 @@ prometheus_version: 2.7.1
 prometheus_config_dir: /etc/prometheus
 prometheus_db_dir: /var/lib/prometheus
 
+prometheus_user: prometheus
+prometheus_group: "root"
+
 prometheus_web_listen_address: "0.0.0.0:9090"
 prometheus_web_external_url: ''
 

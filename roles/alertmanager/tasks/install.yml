@@ -1,24 +1,24 @@
 ---
 - name: create alertmanager system group
   group:
-    name: alertmanager
+    name: "{{ alertmanager_system_group }}"
     system: true
     state: present
 
 - name: create alertmanager system user
   user:
-    name: alertmanager
+    name: "{{ alertmanager_system_user }}"
     system: true
     shell: "/sbin/nologin"
-    group: alertmanager
+    group: "{{ alertmanager_system_group }}"
     createhome: false
 
 - name: create alertmanager directories
   file:
     path: "{{ item }}"
     state: directory
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
     mode: 0755
   with_items:
     - "{{ alertmanager_config_dir }}"
@@ -28,7 +28,7 @@
 - name: download alertmanager binary to local folder
   become: false
   unarchive:
-    src: "{{ repo_url }}/alertmanager/v{{ alertmanager_version }}/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
+    src: "{{ repo_url }}/alertmanager/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}.tar.gz"
     dest: "/tmp"
     remote_src: true
     creates: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/alertmanager"
@@ -45,8 +45,8 @@
     src: "/tmp/alertmanager-{{ alertmanager_version }}.linux-{{ go_arch_map[ansible_architecture] | default(ansible_architecture) }}/{{ item }}"
     dest: "{{ prometheus_install_dir }}/{{ item }}"
     mode: 0755
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
   with_items:
     - alertmanager
     - amtool

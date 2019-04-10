@@ -1,12 +1,8 @@
 ---
 
 repo_url: http://10.168.0.45:8089/repository/raw-public/monitoring/prometheus
-
 prometheus_install_dir: /usr/its/monitoring/prometheus
 grafana_home: /usr/its/monitoring/grafana
-grafana_logs_dir: "/var/log/grafana"
-grafana_data_dir: "/var/lib/grafana"
-grafana_conf_dir: /etc/grafana
 
 netdata_config:
   global:
@@ -25,25 +21,24 @@ prometheus_alertmanager_config:
 # Configure prometheus targets
 prometheus_targets:
   node:
-  - targets:
-    - localhost:9100
-    labels:
-      env: demosite
+    - targets: "{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | map('regex_replace', '$', ':9100') | list }}"
+      labels:
+        env: demo
   alertmanager:
     - targets:
       - "{{ ansible_host }}:9093"
       labels:
-        env: demosite
+        env: demo
   grafana:
     - targets:
       - "{{ ansible_host }}:3000"
       labels:
-        env: demosite
+        env: demo
   netdata:
     - targets:
-      - "localhost:19999"
+      - "{{ ansible_host }}:19999"
       labels:
-        env: demosite
+        env: demo
 
 # Prometheus scrap config
 prometheus_scrape_configs:
@@ -107,21 +102,16 @@ grafana_security:
 
 # Grafana datasources
 grafana_datasources:
-- name: prometheus
-  type: prometheus
-  access: proxy
+- name: "Prometheus"
+  type: "prometheus"
+  access: "proxy"
   url: "http://{{ ansible_host }}:9090"
-  basicAuth: true
-  basicAuthUser: "grafana"
-  basicAuthPassword: "grafana"
+  isDefault: true
 
 - name: Ambari Metrics
   type: Ambari Metrics
   access: proxy
   #url: "http://{{ ansible_host }}:9090"
-  basicAuth: true
-  basicAuthUser: "grafana"
-  basicAuthPassword: "grafana"
 
 # Grafana plugins
 grafana_plugins:
@@ -131,9 +121,9 @@ grafana_plugins:
 grafana_dashboards:
 # Node Exporter Full with Hostname
 - category: exporters
-  name: 'node-exporter-full-with-hostname'
-  dashboard_id: '6212'
-  revision_id: '2'
+  name: 'node-exporter-full'
+  dashboard_id: '1860'
+  revision_id: '12'
   datasource: '{{ grafana_datasources.0.name }}'
 # Prometheus 2.0 Overview
 - category: exporters

@@ -16,8 +16,8 @@ grafana_data_dir: "/var/lib/grafana"
 grafana_conf_dir: /etc/grafana
 grafana_restart_on_update: True
 
-grafana_user: root
-grafana_group: grafana
+grafana_user: grafana
+grafana_group: root
 
 grafana_timeout: 20
 grafana_limit_no_file: 10000

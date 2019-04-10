@@ -13,7 +13,7 @@ blacklistObjectNames:
   - "java.util.logging:type=Logging"
   - "kafka:type=kafka.Log4jController"
 rules:
-- pattern : kafka.cluster<type=(.+), name=(.+), topic=(.+), partition=(.+)><>Value
+- pattern: kafka.cluster<type=(.+), name=(.+), topic=(.+), partition=(.+)><>Value
   name: kafka_cluster_$1_$2
   labels:
     topic: "$3"

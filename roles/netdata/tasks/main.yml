@@ -17,8 +17,6 @@
   template:
     src: netdata.conf.j2
     dest: "{{ netdata_config_dir }}/netdata.conf"
-    owner: netdata
-    group: netdata
   notify: restart netdata
   when: netdata_config
 

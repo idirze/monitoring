@@ -26,7 +26,7 @@
 - name: Download node_exporter binary to local folder
   become: false
   get_url:
-    url: "{{ repo_url }}/node_exporter/v{{ node_exporter_version }}/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
+    url: "{{ repo_url }}/node_exporter/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
     dest: "/tmp/node_exporter-{{ node_exporter_version }}.linux-{{ go_arch }}.tar.gz"
   register: _download_binary
   until: _download_binary is succeeded

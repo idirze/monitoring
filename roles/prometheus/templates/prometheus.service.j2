@@ -7,8 +7,8 @@ After=network.target
 [Service]
 Type=simple
 Environment="GOMAXPROCS={{ ansible_processor_vcpus|default(ansible_processor_count) }}"
-User=prometheus
-Group=prometheus
+User={{ prometheus_user }}
+Group={{ prometheus_group }}
 ExecReload=/bin/kill -HUP $MAINPID
 ExecStart={{ prometheus_install_dir }}/prometheus \
   --config.file={{ prometheus_config_dir }}/prometheus.yml \

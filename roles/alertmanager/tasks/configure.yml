@@ -4,8 +4,8 @@
     force: true
     src: "{{ alertmanager_config_file }}"
     dest: "{{ alertmanager_config_dir }}/alertmanager.yml"
-    owner: alertmanager
-    group: alertmanager
+    owner: "{{ alertmanager_system_user }}"
+    group: "{{ alertmanager_system_group }}"
     mode: 0644
     validate: "{{ prometheus_install_dir }}/amtool --alertmanager.url=  check-config %s"
   notify:

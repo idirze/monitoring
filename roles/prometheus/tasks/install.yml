@@ -1,16 +1,16 @@
 ---
 - name: create prometheus system group
   group:
-    name: prometheus
+    name: "{{ prometheus_group }}"
     system: true
     state: present
 
 - name: create prometheus system user
   user:
-    name: prometheus
+    name: "{{ prometheus_user }}"
     system: true
     shell: "/sbin/nologin"
-    group: prometheus
+    group: "{{ prometheus_group }}"
     createhome: false
     home: "{{ prometheus_db_dir }}"
 
@@ -18,18 +18,19 @@
   file:
     path: "{{ prometheus_db_dir }}"
     state: directory
-    owner: prometheus
-    group: prometheus
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
     mode: 0755
 
 - name: create prometheus configuration directories
   file:
     path: "{{ item }}"
     state: directory
-    owner: root
-    group: prometheus
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
     mode: 0770
   with_items:
+    - "{{ prometheus_install_dir }}"
     - "{{ prometheus_config_dir }}"
     - "{{ prometheus_config_dir }}/conf.d"
     - "{{ prometheus_config_dir }}/rules"
@@ -38,7 +39,7 @@
 - name: download prometheus binary to local folder
   become: false
   get_url:
-    url: "{{ repo_url }}/prometheus/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
+    url: "{{ repo_url }}/prometheus/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
     dest: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}.tar.gz"
   register: _download_archive
   until: _download_archive is succeeded
@@ -62,8 +63,8 @@
     src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}"
     dest: "{{ prometheus_install_dir }}/{{ item }}"
     mode: 0755
-    owner: root
-    group: root
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
   with_items:
     - prometheus
     - promtool
@@ -75,8 +76,8 @@
     src: "/tmp/prometheus-{{ prometheus_version }}.linux-{{ go_arch }}/{{ item }}/"
     dest: "{{ prometheus_config_dir }}/{{ item }}/"
     mode: 0644
-    owner: root
-    group: root
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_group }}"
   with_items:
     - console_libraries
     - consoles
