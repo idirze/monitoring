@@ -19,38 +19,15 @@
 #    remote_src: true
 #    mode: 0755
 
-- name: Initialize env properties
-  set_fact:
-    "{{ item.service }}_opts": ""
-  with_items:
-  - "{{ jmx_configirations }}"
 
-- name: Set export env properties
-  set_fact:
-    "{{ item.service }}_opts": |
-      if [[ ${{ item.opts }} != *"javaagent"* ]]; 
-      then
-         #if ! [ `lsof -n -i:{{ item.port }} | grep LISTEN | wc -l` == "1" ]; 
-         #then
-           export {{ item.opts }}="${{ item.opts }} -javaagent:{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar={{ item.port }}:{{ jmx_prometheus_javaagent_lib_dir }}/{{ item.service }}.yml"
-         #else
-         #  echo "{{ item.service }} - The port {{ item.port }} was already used"
-         #fi
-      fi  
-      {{ lookup ('vars', item.service + '_opts')}}
-  with_items:
-  - "{{ jmx_configirations }}"
+#- debug:
+#    msg: "tmp directory: {{ item.0.port }}  On host {{ item.1 }}"
+#  no_log: false
+#  with_subelements:
+#  - "{{ jmx_configirations }}"
+#  - groups
 
-- name: Set env properties markers
-  set_fact:
-    "{{ item.service }}_opts": |
-      
-      # Ansible manged block
-      {{ lookup ('vars', item.service + '_opts')}}
-
-  with_items:
-  - "{{ jmx_configirations }}"
-
+### Put the section inside the block 
 - name: Get env properties
   ambari_configs:
     ambari_url: "{{ ambari_url }}"
@@ -62,9 +39,50 @@
   with_items:
   - "{{ jmx_configirations }}"
   #delegate_to: localhost
+  #become: false
   run_once: true
   no_log: true
 
+- become: false
+  delegate_to: localhost
+  run_once: true
+  no_log: true
+  block:
+    - name: Create local tmp directory
+      tempfile:
+        state: directory
+      register: _tmp_env
+      changed_when: false
+      check_mode: false
+
+    - debug:
+        msg: "tmp directory: {{ _tmp_env }}"
+      no_log: false
+
+    - name: Copy env properties into a local file
+      copy:
+        dest: "/{{ _tmp_env.path }}/{{ item.item.service }}_opts.sh"
+        force: yes
+        content: |
+          "{{ item.config[0].content }}"
+      with_items:
+      - "{{ serviceEnv.results }}"
+
+    - name: Update env properties with jmx configuration
+      blockinfile:
+        dest: /{{ _tmp_env.path }}/{{ item.item.service }}_opts.sh
+        create: yes
+        state: "{{ jmx_prometheus_javaagent_state }}"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.item.component }}"
+        block: |
+          if [[ ${{ item.item.opts }} != *"javaagent"* ]]; 
+          then
+              export {{ item.item.opts }}="${{ item.item.opts }} -javaagent:{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar={{ item.item.port }}:{{ jmx_prometheus_javaagent_lib_dir }}/{{ item.item.service }}.yml"
+          fi
+      with_items:
+      - "{{ serviceEnv.results }}"
+
+### Put the section inside the block 
 - name: Update env properties
   ambari_configs:
     ambari_url: "{{ ambari_url }}"
@@ -73,14 +91,11 @@
     operation: set
     type: "{{ item.type }}"
     values:
-      content: "{{ item.config[0].content }}\n{{ lookup ('vars', item.item.service + '_opts')}}"
-  when: item.config[0].content.find('.jar='+item.item.port) == -1
+      content: "{{ lookup('file', '/{{ _tmp_env.path }}/'+item.item.service + '_opts.sh') }}"
+  when: item.config[0].content.find('.jar='+item.item.port) == -1 or item.item.state == 'absent'
   with_items:
   - "{{ serviceEnv.results }}"
   #delegate_to: localhost
+  #become: false
   run_once: true
   no_log: true
-
-
-
-

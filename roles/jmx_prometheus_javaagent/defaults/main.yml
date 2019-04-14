@@ -2,19 +2,18 @@
 
 jmx_prometheus_javaagent_version: 0.11.0
 jmx_prometheus_javaagent_lib_dir: /var/lib/jmx_prometheus_javaagent
-
+jmx_prometheus_javaagent_state: present
 ambari_url: http://10.168.0.45:8080
 ambari_user: raj_ops
-ambari_password: raj_ops
 
 
 jmx_configirations:
-- { service: "kafka",     component: "kafka",                type: "kafka-env",     opts: "KAFKA_OPTS",                port: "7071"}
-- { service: "zookeeper", component: "zookeeper",            type: "zookeeper-env", opts: "SERVER_JVMFLAGS",           port: "2188"}
-- { service: "hdfs",      component: "namenode",             type: "hadoop-env",    opts: "HADOOP_NAMENODE_OPTS",      port: "9102"}
-- { service: "hdfs",      component: "datanode",             type: "hadoop-env",    opts: "HADOOP_DATANODE_OPTS",      port: "9103"}
-- { service: "yarn",      component: "resourcemanager",      type: "yarn-env",      opts: "YARN_RESOURCEMANAGER_OPTS", port: "9104"}
-- { service: "yarn",      component: "nodemanager",          type: "yarn-env",      opts: "YARN_NODEMANAGER_OPTS",     port: "9105"}
-- { service: "hbase",     component: "hmaster",              type: "hbase-env",     opts: "HBASE_MASTER_OPTS",         port: "9106"}
-- { service: "hbase",     component: "hregion",              type: "hbase-env",     opts: "HBASE_REGIONSERVER_OPTS",   port: "9107"}
+- { groups: ["all", "targets"], service: "kafka",     component: "kafka",                type: "kafka-env",     opts: "KAFKA_OPTS",                port: "7071", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "zookeeper", component: "zookeeper",            type: "zookeeper-env", opts: "SERVER_JVMFLAGS",           port: "2188", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "hdfs",      component: "namenode",             type: "hadoop-env",    opts: "HADOOP_NAMENODE_OPTS",      port: "9102", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "hdfs",      component: "datanode",             type: "hadoop-env",    opts: "HADOOP_DATANODE_OPTS",      port: "9103", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "yarn",      component: "resourcemanager",      type: "yarn-env",      opts: "YARN_RESOURCEMANAGER_OPTS", port: "9104", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "yarn",      component: "nodemanager",          type: "yarn-env",      opts: "YARN_NODEMANAGER_OPTS",     port: "9105", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "hbase",     component: "hmaster",              type: "hbase-env",     opts: "HBASE_MASTER_OPTS",         port: "9106", state: "{{ jmx_prometheus_javaagent_state }}" }
+- { groups: ["all", "targets"], service: "hbase",     component: "hregion",              type: "hbase-env",     opts: "HBASE_REGIONSERVER_OPTS",   port: "9107", state: "{{ jmx_prometheus_javaagent_state }}" }
 

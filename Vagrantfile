@@ -189,6 +189,8 @@ Vagrant.configure("2") do |config|
           ansible.become = true
           ansible.limit = "all"
           ansible.host_key_checking = false
+          #ansible.ask_vault_pass = true
+          ansible.vault_password_file = "pass"
           ansible.raw_arguments = ["--forks=#{$num_instances}", "--flush-cache"]
           #ansible.verbose = "-vvv"
           #ansible.host_vars = host_vars
