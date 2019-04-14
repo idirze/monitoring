@@ -10,4 +10,4 @@ limit nofile unlimited unlimited
 
 console log
 
-exec start-stop-daemon --chuid {{ grafana_user }} --start --exec "{{ grafana_home}}/grafana-{{ grafana_version }}/bin/grafana-server --config={{ grafana_conf_dir }}/grafana.ini --pidfile=/var/run/grafana.pid"
+exec start-stop-daemon --chuid {{ grafana_user }} --start --exec "{{ grafana_home}}/grafana-{{ grafana_version }}/bin/grafana-server --config={{ grafana_conf_dir }}/grafana.ini --pidfile={{ grafana_pid_dir }}/grafana.pid"

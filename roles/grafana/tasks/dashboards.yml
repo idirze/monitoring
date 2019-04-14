@@ -105,8 +105,7 @@
                path: "{{ grafana_data_dir }}/dashboards"
         backup: false
         owner: "{{ grafana_user }}"
-        group: "{{ grafana_user }}"
-        mode: 0640
+        group: "{{ grafana_group }}"
       notify: restart grafana
 
     - name: Register previously copied dashboards

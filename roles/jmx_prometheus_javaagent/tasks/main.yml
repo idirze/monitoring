@@ -1,0 +1,86 @@
+---
+
+#- name: JMX_EXPORTER | Ensure skeleton paths
+#  file:
+#    dest: "{{ item }}"
+#    state: directory
+#  with_items:
+#    - "{{ jmx_prometheus_javaagent_lib_dir }}"
+
+#- name: JMX_EXPORTER | Download binary
+#  get_url:
+#    url: "{{ repo_url }}/jmx_prometheus_javaagent/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar"
+#    dest: /tmp
+
+#- name: JMX_EXPORTER | Copy binary
+#  copy:
+#    src: "/tmp/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar"
+#    dest: "{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar"
+#    remote_src: true
+#    mode: 0755
+
+- name: Initialize env properties
+  set_fact:
+    "{{ item.service }}_opts": ""
+  with_items:
+  - "{{ jmx_configirations }}"
+
+- name: Set export env properties
+  set_fact:
+    "{{ item.service }}_opts": |
+      if [[ ${{ item.opts }} != *"javaagent"* ]]; 
+      then
+         #if ! [ `lsof -n -i:{{ item.port }} | grep LISTEN | wc -l` == "1" ]; 
+         #then
+           export {{ item.opts }}="${{ item.opts }} -javaagent:{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar={{ item.port }}:{{ jmx_prometheus_javaagent_lib_dir }}/{{ item.service }}.yml"
+         #else
+         #  echo "{{ item.service }} - The port {{ item.port }} was already used"
+         #fi
+      fi  
+      {{ lookup ('vars', item.service + '_opts')}}
+  with_items:
+  - "{{ jmx_configirations }}"
+
+- name: Set env properties markers
+  set_fact:
+    "{{ item.service }}_opts": |
+      
+      # Ansible manged block
+      {{ lookup ('vars', item.service + '_opts')}}
+
+  with_items:
+  - "{{ jmx_configirations }}"
+
+- name: Get env properties
+  ambari_configs:
+    ambari_url: "{{ ambari_url }}"
+    username: "{{ ambari_user }}"
+    password: "{{ ambari_password }}"
+    operation: get
+    type: "{{ item.type }}"
+  register: !unsafe serviceEnv
+  with_items:
+  - "{{ jmx_configirations }}"
+  #delegate_to: localhost
+  run_once: true
+  no_log: true
+
+- name: Update env properties
+  ambari_configs:
+    ambari_url: "{{ ambari_url }}"
+    username: "{{ ambari_user }}"
+    password: "{{ ambari_password }}"
+    operation: set
+    type: "{{ item.type }}"
+    values:
+      content: "{{ item.config[0].content }}\n{{ lookup ('vars', item.item.service + '_opts')}}"
+  when: item.config[0].content.find('.jar='+item.item.port) == -1
+  with_items:
+  - "{{ serviceEnv.results }}"
+  #delegate_to: localhost
+  run_once: true
+  no_log: true
+
+
+
+

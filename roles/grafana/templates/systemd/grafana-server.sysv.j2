@@ -13,7 +13,7 @@ DATA_DIR={{ grafana_data_dir }}
 PLUGINS_DIR={{ grafana_data_dir }}/plugins
 LOG_DIR={{ grafana_logs_dir }}
 CONF_FILE=$CONF_DIR/grafana.ini
-PID_FILE=/var/run/$NAME.pid
+PID_FILE={{ grafana_pid_dir }}/$NAME.pid
 DAEMON=bin/$NAME
 
 if [ `id -u` -ne 0 ]; then

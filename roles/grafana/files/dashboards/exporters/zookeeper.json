@@ -1,0 +1,1087 @@
+{
+    "annotations": {
+      "enable": false,
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "id": 261,
+    "iteration": 1555193515727,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 44,
+        "panels": [],
+        "repeat": null,
+        "title": "Zookeeper",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 0,
+          "y": 1
+        },
+        "height": "160px",
+        "id": 6,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [
+          {
+            "alias": "/MaxClientCnxnsPerHost/",
+            "color": "#890F02",
+            "fill": 0,
+            "legend": false
+          }
+        ],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_NumAliveConnections{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{instance}}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.NumAliveConnections, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Connections",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "height": "160px",
+        "id": 34,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_AvgRequestLatency{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{instance}}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.AvgRequestLatency, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Avg Request Latency",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": "ticks",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 0,
+          "y": 5
+        },
+        "height": "160px",
+        "id": 35,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_OutstandingRequests{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ instance }}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.OutstandingRequests, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Outstanding Requests",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 5
+        },
+        "height": "160px",
+        "id": 41,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_PendingRevalidationCount{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ instance }}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.OutstandingRequests, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Pending session revalidations",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 0,
+          "y": 9
+        },
+        "height": "160px",
+        "id": 42,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_NodeCount{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ instance }}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.OutstandingRequests, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Znodes count",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "aliasColors": {},
+        "annotate": {
+          "enable": false
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "fill": 0,
+        "grid": {
+          "max": null,
+          "min": null
+        },
+        "gridPos": {
+          "h": 4,
+          "w": 12,
+          "x": 12,
+          "y": 9
+        },
+        "height": "160px",
+        "id": 43,
+        "interactive": true,
+        "legend": {
+          "alignAsTable": false,
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "rightSide": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "legend_counts": true,
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "options": false,
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "resolution": 100,
+        "scale": 1,
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "spyable": true,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "org_apache_ZooKeeperService_WatchCount{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ instance }}",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.zookeeper.$zookeeper_hosts.zookeeper.OutstandingRequests, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "timezone": "browser",
+        "title": "Watch count",
+        "tooltip": {
+          "msResolution": true,
+          "query_as_alias": true,
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": 0,
+            "show": true
+          },
+          {
+            "format": "short",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": false
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        },
+        "zerofill": true
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 13
+        },
+        "id": 45,
+        "panels": [],
+        "repeat": null,
+        "title": "JVM",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "editable": true,
+        "error": false,
+        "fill": 0,
+        "grid": {},
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 0,
+          "y": 14
+        },
+        "id": 36,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "increase(jvm_gc_collection_seconds_sum{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}[5m])",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{ instance }} {{gc}}",
+            "refId": "A",
+            "target": "aliasByNode(nonNegativeDerivative(zookeeper.cluster.$cluster.jvm_memory.$zookeeper_hosts.sun_management_GarbageCollectorImpl.PSScavenge.CollectionTime.upper), 4)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "GC Time",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "editable": true,
+        "error": false,
+        "fill": 0,
+        "grid": {},
+        "gridPos": {
+          "h": 7,
+          "w": 12,
+          "x": 12,
+          "y": 14
+        },
+        "id": 39,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "increase(jvm_gc_collection_seconds_count{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\"}[5m])",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{instance}} {{gc}}",
+            "refId": "A",
+            "target": "aliasByNode(nonNegativeDerivative(zookeeper.cluster.$cluster.jvm_memory.$zookeeper_hosts.sun_management_GarbageCollectorImpl.PSMarkSweep.CollectionCount.upper), 4)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "GC Count",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": "",
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 21
+        },
+        "id": 46,
+        "panels": [],
+        "repeat": null,
+        "title": "New row",
+        "type": "row"
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "$datasource",
+        "editable": true,
+        "error": false,
+        "fill": 0,
+        "grid": {},
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 22
+        },
+        "id": 40,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 2,
+        "links": [],
+        "nullPointMode": "connected",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "expr": "jvm_memory_bytes_used{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\", area=\"heap\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{instance}} used",
+            "refId": "A",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.jvm_memory.$zookeeper_hosts.memory.HeapMemoryUsage_used.upper, 4, 6)"
+          },
+          {
+            "expr": "jvm_memory_bytes_max{zookeeper_cluster=\"$cluster\", instance=~\"$zookeeper_hosts\", area=\"heap\"}",
+            "format": "time_series",
+            "intervalFactor": 2,
+            "legendFormat": "{{instance}} max",
+            "refId": "C",
+            "target": "aliasByNode(zookeeper.cluster.$cluster.jvm_memory.$zookeeper_hosts.memory.HeapMemoryUsage_max.upper, 4, 6)"
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Heap Used vs Max",
+        "tooltip": {
+          "msResolution": false,
+          "shared": true,
+          "sort": 0,
+          "value_type": "cumulative"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "bytes",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      }
+    ],
+    "refresh": "5m",
+    "schemaVersion": 16,
+    "style": "light",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "text": "eqiad prometheus/ops",
+            "value": "eqiad prometheus/ops"
+          },
+          "hide": 0,
+          "label": null,
+          "name": "datasource",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "/.*(analytics|ops).*/",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "allFormat": "glob",
+          "allValue": null,
+          "current": {
+            "text": "main-eqiad",
+            "value": "main-eqiad"
+          },
+          "datasource": "$datasource",
+          "definition": "",
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "multiFormat": "glob",
+          "name": "cluster",
+          "options": [],
+          "query": "label_values(org_apache_ZooKeeperService_OutstandingRequests, zookeeper_cluster)",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tags": [],
+          "tagsQuery": null,
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allFormat": "glob",
+          "allValue": ".*:12181",
+          "current": {
+            "text": "All",
+            "value": "$__all"
+          },
+          "datasource": "$datasource",
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": null,
+          "multi": false,
+          "multiFormat": "glob",
+          "name": "zookeeper_hosts",
+          "options": [],
+          "query": "label_values(org_apache_ZooKeeperService_OutstandingRequests{zookeeper_cluster=\"$cluster\"},instance)",
+          "refresh": 1,
+          "refresh_on_load": false,
+          "regex": "/[a-z0-9]*/",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": null,
+          "tags": [],
+          "tagsQuery": null,
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {
+      "collapse": false,
+      "enable": true,
+      "notice": false,
+      "now": true,
+      "refresh_intervals": [
+        "1m",
+        "5m",
+        "1h",
+        "1d"
+      ],
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "type": "timepicker"
+    },
+    "timezone": "utc",
+    "title": "Zookeeper",
+    "uid": "000000261",
+    "version": 23
+  }

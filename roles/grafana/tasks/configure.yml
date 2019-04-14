@@ -12,6 +12,7 @@
     group: "{{ grafana_group }}"
     state: directory
   with_items:
+    - "{{ grafana_pid_dir }}"
     - "{{ grafana_logs_dir }}"
     - "{{ grafana_conf_dir }}"
     - "{{ grafana_data_dir }}/plugins"

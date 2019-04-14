@@ -190,6 +190,7 @@ Vagrant.configure("2") do |config|
           ansible.limit = "all"
           ansible.host_key_checking = false
           ansible.raw_arguments = ["--forks=#{$num_instances}", "--flush-cache"]
+          #ansible.verbose = "-vvv"
           #ansible.host_vars = host_vars
           #ansible.tags = ['download']
           ansible.groups = {

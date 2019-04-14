@@ -15,6 +15,7 @@ grafana_logs_dir: "/var/log/grafana"
 grafana_data_dir: "/var/lib/grafana"
 grafana_conf_dir: /etc/grafana
 grafana_restart_on_update: True
+grafana_pid_dir: "{{ grafana_home }}/var/run/grafana"
 
 grafana_user: grafana
 grafana_group: root

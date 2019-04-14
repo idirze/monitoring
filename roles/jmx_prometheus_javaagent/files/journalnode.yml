@@ -1,0 +1,11 @@
+---
+lowercaseOutputLabelNames: true
+lowercaseOutputName: false
+whitelistObjectNames:
+  - 'Hadoop:service=JournalNode,name=Journal?*'
+  - 'Hadoop:service=JournalNode,name=RpcActivityForPort8485'
+rules:
+  - pattern: "^Hadoop<service=(\\w+), name=Journal-(.+)><>(\\w+)"
+    name: "hadoop_journal_$3"
+    labels:
+      role: "$1"

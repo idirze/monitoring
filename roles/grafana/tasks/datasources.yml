@@ -26,7 +26,6 @@
       {{ grafana_datasources | to_nice_yaml }}
     backup: false
     owner: "{{ grafana_user }}"
-    group: "{{ grafana_user }}"
-    mode: 0640
+    group: "{{ grafana_group }}"
   notify: restart grafana
   when: grafana_use_provisioning
