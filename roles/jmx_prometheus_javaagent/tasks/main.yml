@@ -64,16 +64,16 @@
         dest: "/{{ _tmp_env.path }}/{{ item.item.service }}_opts.sh"
         force: yes
         content: |
-          "{{ item.config[0].content }}"
+          {{ item.config[0].content }}
       with_items:
       - "{{ serviceEnv.results }}"
 
     - name: Update env properties with jmx configuration
       blockinfile:
         dest: /{{ _tmp_env.path }}/{{ item.item.service }}_opts.sh
-        create: yes
+        create: no
         state: "{{ jmx_prometheus_javaagent_state }}"
-        marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.item.component }}"
+        marker: "### {mark} ANSIBLE MANAGED BLOCK {{ item.item.component }}"
         block: |
           if [[ ${{ item.item.opts }} != *"javaagent"* ]]; 
           then

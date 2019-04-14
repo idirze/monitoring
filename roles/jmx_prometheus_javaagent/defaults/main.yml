@@ -2,7 +2,7 @@
 
 jmx_prometheus_javaagent_version: 0.11.0
 jmx_prometheus_javaagent_lib_dir: /var/lib/jmx_prometheus_javaagent
-jmx_prometheus_javaagent_state: present
+jmx_prometheus_javaagent_state: absent
 ambari_url: http://10.168.0.45:8080
 ambari_user: raj_ops
 
