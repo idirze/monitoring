@@ -1,0 +1,39 @@
+groups:
+- name: zookeeper.rules
+  rules:
+    - alert: ZookeeperRequestAvgLatencyTooHighWarning
+      annotations:
+        message: "{{ $labels.namespace }}/{{ $labels.pod }} zk_avg_latency was greater than 50."
+        summary: Zookeeper taking too long to respond to client requests (warning).
+      expr: zk_avg_latency > 50
+      labels:
+        severity: warning
+    - alert: ZookeeperRequestAvgLatencyTooHighCritical
+      annotations:
+        message: "{{ $labels.namespace }}/{{ $labels.pod }} zk_avg_latency was greater than 100."
+        summary: Zookeeper taking too long to respond to client requests (critical).
+      expr: zk_avg_latency > 100
+      labels:
+        severity: critical
+    - alert: ZookeeperTooManyOutstandingRequests
+      annotations:
+        message: "{{ $labels.namespace }}/{{ $labels.pod }} zk_outstanding_requests was greater than 10 for greater than 5m."
+        summary: Zookeeper enqueued too many requests. Zookeeper was unable to keep up with requests it received.
+      expr: avg_over_time(zk_outstanding_requests[5m]) > 10
+      labels:
+        severity: critical
+    - alert: ZookeeperTooManyPendingSyncs
+      annotations:
+        message: "{{ $labels.namespace }}/{{ $labels.pod }} zk_pending_syncs was greater than 10 for greater than 5m."
+        summary: Zookeeper had too many pending syncs.
+      expr: avg_over_time(zk_pending_syncs[5m]) > 10
+      labels:
+        severity: critical
+    - alert: ZookeeperWrongNumberOfFollowersPerStatefulSet
+      annotations:
+        message: "{{ $labels.namespace }}/{{ $labels.pod }} followers was not equal to (number of ensemble servers -1) for 20m."
+        summary: Zookeeper followers was less than expected per the StatefulSet's desired replica count.
+      for: 20m
+      expr: avg(zk_followers) != ( avg(kube_statefulset_replicas{statefulset="zookeeper"}) - 1 )
+      labels:
+        severity: critical
