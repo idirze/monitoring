@@ -13,7 +13,7 @@
     recurse: true
     owner: "{{ grafana_user }}"
     group: "{{ grafana_group }}"
-    mode: 0640
+    mode: 0750
   listen: "provisioned dashboards changed"
 
 - name: Set privileges on provisioned dashboards directory

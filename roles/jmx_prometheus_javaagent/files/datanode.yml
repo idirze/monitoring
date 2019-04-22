@@ -1,8 +1,7 @@
 ---
-startDelaySeconds: 0
-ssl: false
-lowercaseOutputName: true
 lowercaseOutputLabelNames: true
+lowercaseOutputName: false
+
 whitelistObjectNames:
   - 'Hadoop:service=DataNode,name=*'
   - 'Hadoop:service=DataNode,name=MetricsSystem,sub=*'

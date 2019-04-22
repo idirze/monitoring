@@ -1,24 +1,23 @@
 ---
-startDelaySeconds: 0
-ssl: false
-lowercaseOutputName: true
 lowercaseOutputLabelNames: true
+lowercaseOutputName: false
+
 whitelistObjectNames:
   - 'Hadoop:service=NameNode,name=FSNamesystem'
   - 'Hadoop:service=NameNode,name=NameNodeActivity'
-  - 'Hadoop:service=NameNode,name=RpcActivityForPort8020'
+  #- 'Hadoop:service=NameNode,name=RpcActivityForPort8020'
+  - 'Hadoop:service=NameNode,name=RpcActivity*'
 blacklistObjectNames:
   - 'Hadoop:service=NameNode,name=RetryCache.NameNodeRetryCache'
-  - 'Hadoop:service=NameNode,name=RpcActivity*'
   - 'Hadoop:service=NameNode,name=RpcDetailedActivity*'
   - 'Hadoop:service=NameNode,name=UgiMetrics'
 rules:
   - pattern: "^Hadoop<service=(\\w+), name=FSNamesystem><>(\\w+)"
-    name: "hadoop_fs_$2"
+    name: "Hadoop_NameNode_$2"
     labels:
       role: "$1"
   - pattern: "^Hadoop<service=(\\w+), name=NameNodeActivity><>(\\w+)"
-    name: "hadoop_activity_$2"
+    name: "Hadoop_NameNode_$2"
     labels:
       role: "$1"
   - pattern: "^Hadoop<service=(\\w+), name=NameNodeInfo><>(\\w+)"
@@ -28,7 +27,7 @@ rules:
   # MetricsSystem
   - pattern: 'Hadoop<service=(.*), name=MetricsSystem, sub=(.*)><>(.*): (\d+)'
     attrNameSnakeCase: true
-    name: hadoop_$1_$3
+    name: Hadoop_NameNode_$1_$3
     value: $4
     labels:
       service: HDFS
@@ -39,7 +38,7 @@ rules:
   # All NameNode infos
   - pattern: 'Hadoop<service=(.*), name=(.*)><>(.*): (\d+)'
     attrNameSnakeCase: true
-    name: hadoop_$1_$3
+    name: Hadoop_$1_$3
     value: $4
     labels:
       service: HDFS

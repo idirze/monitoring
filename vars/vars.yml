@@ -4,6 +4,13 @@ repo_url: http://10.168.0.45:8089/repository/raw-public/monitoring/prometheus
 prometheus_install_dir: /usr/its/monitoring/prometheus
 grafana_home: /usr/its/monitoring/grafana
 
+cluster:
+  hdp:
+    name: hdp0002
+  es:
+    name: es0003
+
+
 netdata_config:
   global:
     history: 7200
@@ -12,33 +19,16 @@ netdata_config:
   "plugin:proc":
     /proc/net/snmp: "no"
     /proc/net/snmp6: "no"
-# Configure alert manager
+
+    # Configure alert manager
 prometheus_alertmanager_config:
 - scheme: http
   static_configs:
     - targets: 
       - "{{ ansible_host }}:9093"
+    
 # Configure prometheus targets
-prometheus_targets:
-  node:
-    - targets: "{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | map('regex_replace', '$', ':9100') | list }}"
-      labels:
-        env: demo
-  alertmanager:
-    - targets:
-      - "{{ ansible_host }}:9093"
-      labels:
-        env: demo
-  grafana:
-    - targets:
-      - "{{ ansible_host }}:3000"
-      labels:
-        env: demo
-  netdata:
-    - targets:
-      - "{{ ansible_host }}:19999"
-      labels:
-        env: demo
+prometheus_targets: []
 
 # Prometheus scrap config
 prometheus_scrape_configs:
@@ -47,32 +37,108 @@ prometheus_scrape_configs:
   static_configs:
   - targets:
     - "{{ ansible_host }}:9090"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
 - job_name: "node"
-  file_sd_configs:
-  - files:
-    - "/etc/prometheus/file_sd/node.yml"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9100"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
 - job_name: "alertmanager"
-  file_sd_configs:
-  - files:
-    - "/etc/prometheus/file_sd/alertmanager.yml"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9093"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
 - job_name: "grafana"
-  file_sd_configs:
-  - files:
-    - "/etc/prometheus/file_sd/grafana.yml"
-- job_name: "netdata"
-  scrape_interval: 60s
-  metrics_path: "/api/v1/allmetrics"
-  params:
-    format: ['prometheus']
-  honor_labels: true
-  file_sd_configs:
-  - files:
-    - "/etc/prometheus/file_sd/netdata.yml"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:3000"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
 - job_name: "pushgateway"
   metrics_path: "/metrics"
   static_configs:
   - targets:
     - "{{ ansible_host }}:9091"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "kafka"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:7071"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "zookeeper"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:2188"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "datanode"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9103"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "namenode"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9102"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "journalnode"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9108"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "resourcemanager"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9104"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "nodemanager"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9105"
+    labels:
+      cluster: "{{ cluster.hdp.name }}"
+
+- job_name: "elasticsearch"
+  metrics_path: "/metrics"
+  static_configs:
+  - targets:
+    - "{{ ansible_host }}:9114"
+    labels:
+      # Remove Feeded by es
+      exported_cluster: "{{ cluster.es.name }}"
+      
+
+
 
 # Configure slack
 alertmanager_external_url: "http://{{ ansible_host }}:9093"
@@ -108,36 +174,24 @@ grafana_datasources:
   url: "http://{{ ansible_host }}:9090"
   isDefault: true
 
-- name: Ambari Metrics
-  type: Ambari Metrics
+- name: "Ambari Metrics"
+  type: "Ambari Metrics"
   access: proxy
-  #url: "http://{{ ansible_host }}:9090"
+  url: "http://{{ ansible_host }}:9090"
 
 # Grafana plugins
 grafana_plugins:
 - "prajwalrao-ambari-metrics-grafana-1.0.1-1-gd429f53"
 
-# Grafana dashboards
-grafana_dashboards:
-# Node Exporter Full with Hostname
-- category: exporters
-  name: 'node-exporter-full'
-  dashboard_id: '1860'
-  revision_id: '12'
-  datasource: '{{ grafana_datasources.0.name }}'
-# Prometheus 2.0 Overview
-- category: exporters
-  name: 'prometheus-2-0-overview'
-  dashboard_id: '3662'
-  revision_id: '2'
-  datasource: '{{ grafana_datasources.0.name }}'
-# Netdata: Netdata dashboards for Grafana via Prometheus.
-- category: exporters
-  name: 'netdata'
-  dashboard_id: '7107'
-  revision_id: '1'
-  datasource: '{{ grafana_datasources.0.name }}'
-# Ambari metrics dashboards
-- category: ams
-  name: all
 
+grafana_dashboards:
+- { name: "Home",           folder: "home",         path: "dashboards/home",        orgId: 1}
+- { name: "System",         folder: "system",       path: "dashboards/system",      orgId: 1}
+- { name: "HDFS",           folder: "hdfs",         path: "dashboards/hdfs",        orgId: 1}
+- { name: "Yarn",           folder: "yarn",         path: "dashboards/yarn",        orgId: 1}
+- { name: "HBase",          folder: "hbase",        path: "dashboards/hbase",       orgId: 1}
+- { name: "Kafka",          folder: "kafka",        path: "dashboards/kafka",           orgId: 1}
+- { name: "Prometheus",     folder: "prometheus",   path: "dashboards/prometheus",      orgId: 1}
+- { name: "Zookeeper",      folder: "zookeeper",    path: "dashboards/zookeeper",       orgId: 1}
+- { name: "Elasticsearch",  folder: "elasticsearch",path: "dashboards/elasticsearch",   orgId: 1}
+- { name: "Applications",   folder: "applications", path: "dashboards/applications",     orgId: 1}

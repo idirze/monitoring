@@ -11,48 +11,22 @@
       changed_when: false
       check_mode: false
 
-   # - name: download grafana dashboard from grafana.net to local directory
-   #   command: >
-   #     curl --fail --compressed
-   #     {{ repo_url }}/dashboards/{{ item.dashboard_id }}/{{ item.revision_id }}/{{ item.name }}
-   #     -o {{ _tmp_dashboards.path }}/{{ item.dashboard_id }}.json
-   #   args:
-   #     creates: "{{ _tmp_dashboards.path }}/{{ item.dashboard_id }}.json"
-   #     warn: false
-   #   register: _download_dashboards
-   #   until: _download_dashboards is succeeded
-   #   retries: 5
-   #   delay: 2
-   #   with_items: "{{ grafana_dashboards }}"
-   #   when: grafana_dashboards | length > 0
-   #   changed_when: false
-   #   check_mode: false
-   #   tags:
-   #     - skip_ansible_lint
-
-    - name: copy grafana dashboard
-      copy:
-        src: "dashboards/{{ item.category }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id}}.json"
-        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id }}.json"
-      when: item.name != "all"
+    - name: create grafana folders
+      file:
+        path: "{{ _tmp_dashboards.path }}/{{ item.folder }}"
+        state: "directory"
+        mode: 0750
       with_items: 
       - "{{ grafana_dashboards }}"
 
     - name: copy grafana all dashboard
-      copy:
-        src: "{{ item }}"
-        dest: "{{ _tmp_dashboards.path }}"
-      with_fileglob: 
-      - "dashboards/ams/**"
-
-    - name: Set the correct data source name in the dashboard
-      replace:
-        dest: "{{ _tmp_dashboards.path }}/{{ item.name }}_{{ item.dashboard_id }}_rev{{ item.revision_id}}.json"
-        regexp: '"(?:\${)?DS_[A-Z0-9_-]+(?:})?"'
-        replace: '"{{ item.datasource }}"'
-      changed_when: false
-      when: grafana_dashboards | length > 0 and item.name != "all"
-      with_items: "{{ grafana_dashboards }}"
+      file:
+        src: "{{ item.src }}"
+        dest: "{{ _tmp_dashboards.path }}/"
+        state: hard
+      when: item.state == 'file'
+      with_filetree: 
+      - "dashboards/"
 
 - name: Import grafana dashboards through API
   uri:
@@ -71,7 +45,7 @@
       }
   no_log: false
   with_fileglob:
-    - "{{ _tmp_dashboards.path }}/*"
+    - "{{ _tmp_dashboards.path }}/*.json"
   when: not grafana_use_provisioning
 
 # TODO: uncomment this when ansible 2.7 will be min supported version
@@ -92,17 +66,9 @@
   block:
     - name: Create/Update dashboards file (provisioning)
       become: true
-      copy:
+      template:
+        src: "grafana_folders.yml.j2"
         dest: "{{ grafana_conf_dir }}/provisioning/dashboards/ansible.yml"
-        content: |
-          apiVersion: 1
-          providers:
-           - name: 'default'
-             orgId: 1
-             folder: ''
-             type: file
-             options:
-               path: "{{ grafana_data_dir }}/dashboards"
         backup: false
         owner: "{{ grafana_user }}"
         group: "{{ grafana_group }}"
@@ -117,13 +83,22 @@
       register: _dashboards_present
       when: grafana_provisioning_synced
 
-    - name: Import grafana dashboards
+    - name: Create target grafana folders
       become: true
+      file:
+        path: "{{ grafana_data_dir }}/dashboards/{{ item.folder }}"
+        state: "directory"
+        mode: 0750
+      with_items: 
+      - "{{ grafana_dashboards }}"
+
+    - name: Import grafana dashboards
       copy:
-        src: "{{ item }}"
-        dest: "{{ grafana_data_dir }}/dashboards/{{ item | basename }}"
-      with_fileglob:
-        - "{{ _tmp_dashboards.path }}/*"
+        src: "{{ item.src }}"
+        dest: "{{ grafana_data_dir }}/dashboards/{{ item.path | dirname }}"
+      when: item.state == 'file' and item.src is match('.*.json')
+      with_filetree: 
+      - "dashboards/"
       register: _dashboards_copied
       notify: "provisioned dashboards changed"
 

@@ -13,11 +13,6 @@
     - ansible_architecture != "x86_64"
     - not ( ansible_architecture in ['armv6l', 'armv7l'] and ansible_os_family == 'Debian' )
 
-- name: Fail when datasources aren't configured when dashboards are set to be installed
-  fail:
-    msg: "You need to specify datasources for dashboards!!!"
-  when: grafana_dashboards != [] and grafana_datasources == []
-
 - name: Fail when grafana admin user isn't set
   fail:
     msg: "Please specify grafana admin user (grafana_security.admin_user)"

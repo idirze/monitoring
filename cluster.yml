@@ -4,12 +4,13 @@
   - ./vars/vars.yml
   - ./vars/vault
   roles:
- # - roles/prometheus
- # - roles/alertmanager
- # - roles/pushgateway
- # - roles/node-exporter
- # - roles/netdata
- # - roles/grafana
-  - roles/jmx_prometheus_javaagent
+  #- roles/prometheus
+  #- roles/alertmanager
+  #- roles/pushgateway
+  #- roles/node-exporter
+  #- roles/elasticsearch-exporter
+  #- roles/netdata
+  - roles/grafana
+  #- roles/jmx_prometheus_javaagent
 
 

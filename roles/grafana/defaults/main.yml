@@ -1,5 +1,5 @@
 ---
-grafana_version: 6.1.1
+grafana_version: 5.4.3
 grafana_yum_repo_template: etc/yum.repos.d/grafana.repo.j2
 
 # Should we use the provisioning capability when possible (provisioning require grafana >= 5.0)
@@ -81,7 +81,7 @@ grafana_users:
   # auto_assign_org: true
   auto_assign_org_role: Viewer
   # login_hint: "email or username"
-  default_theme: dark
+  default_theme: light
   # external_manage_link_url: ""
   # external_manage_link_name: ""
   # external_manage_info: ""

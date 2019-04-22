@@ -1,0 +1,11 @@
+apiVersion: 1
+providers:
+{% for d in grafana_dashboards %}
+- name: "{{ d.name }}"
+  orgId: {{ d.orgId }}
+  folder: "{{ d.folder }}"
+  type: file
+  options:
+    path: "{{ grafana_data_dir }}/dashboards/{{ d.folder }}"
+{% endfor %}
+
