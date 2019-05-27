@@ -7,11 +7,20 @@ whitelistObjectNames:
   - 'Hadoop:service=NameNode,name=NameNodeActivity'
   #- 'Hadoop:service=NameNode,name=RpcActivityForPort8020'
   - 'Hadoop:service=NameNode,name=RpcActivity*'
+  - 'Hadoop:service=NameNode,name=JvmMetrics'
+  - 'Hadoop:service=NameNode,name=RpcDetailedActivity*'
 blacklistObjectNames:
   - 'Hadoop:service=NameNode,name=RetryCache.NameNodeRetryCache'
-  - 'Hadoop:service=NameNode,name=RpcDetailedActivity*'
   - 'Hadoop:service=NameNode,name=UgiMetrics'
 rules:
+  - pattern: "^Hadoop<service=(\\w+), name=RpcDetailedActivity><>(\\w+)"
+    name: "Hadoop_NameNode_$2"
+    labels:
+      role: "$1"
+  - pattern: "^Hadoop<service=(\\w+), name=JvmMetrics><>(\\w+)"
+    name: "Hadoop_NameNode_$2"
+    labels:
+      role: "$1"
   - pattern: "^Hadoop<service=(\\w+), name=FSNamesystem><>(\\w+)"
     name: "Hadoop_NameNode_$2"
     labels:

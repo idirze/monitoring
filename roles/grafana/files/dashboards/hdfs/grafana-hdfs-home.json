@@ -15,12 +15,13 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1555869161362,
+  "id": 52,
+  "iteration": 1558816291820,
   "links": [
     {
-      "asDropdown": true,
+      "asDropdown": false,
       "icon": "external link",
-      "keepTime": true,
+      "keepTime": false,
       "tags": [
         "hdfs"
       ],
@@ -30,7 +31,7 @@
   ],
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -38,697 +39,734 @@
         "y": 0
       },
       "id": 9,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 1,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_NumFilesUnderConstruction{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "dfs.FSNamesystem.NumFilesUnderConstruction",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Number of Files Under Construction",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 2,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_num_open_connections{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "rpc.rpc.client.NumOpenConnections",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "RPC Client Connections",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "Number of Files Under Construction & RPC Client Connections",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "id": 1,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "hosts": "",
-          "metric": "dfs.FSNamesystem.NumFilesUnderConstruction",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Number of Files Under Construction",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 2,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "rpc.rpc.client.NumOpenConnections",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "RPC Client Connections",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 1
       },
       "id": 10,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 2
+          },
+          "id": 3,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "increase(Hadoop_NameNode_TotalFileOps{instance=~\"$server.*\", cluster=\"$cluster\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "dfs.namenode.TotalFileOps",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "rate"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Total File Operations",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 2
+          },
+          "id": 4,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "dfs.FSNamesystem.CapacityTotalGB._avg",
+              "yaxis": 2
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_CapacityUsedGB{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "CapacityUsedGB",
+              "metric": "dfs.FSNamesystem.CapacityUsedGB",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            },
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_CapacityTotalGB{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "CapacityTotalGB",
+              "metric": "dfs.FSNamesystem.CapacityTotalGB",
+              "precision": "default",
+              "refId": "B",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Capacity Used",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "gbytes",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "Total File Operations & Capacity Used",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 9
-      },
-      "id": 3,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "dfs.namenode.TotalFileOps",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": "",
-          "transform": "rate"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Total File Operations",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 9
-      },
-      "id": 4,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "dfs.FSNamesystem.CapacityTotalGB._avg",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "hosts": "",
-          "metric": "dfs.FSNamesystem.CapacityUsedGB",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": ""
-        },
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "dfs.FSNamesystem.CapacityTotalGB",
-          "precision": "default",
-          "refId": "B",
-          "templatedHost": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Capacity Used",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "gbytes",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 2
       },
       "id": 11,
-      "panels": [],
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 10
+          },
+          "id": 5,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_rpc_slow_calls{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "rpc.rpc.client.RpcSlowCalls",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "RPC Client Port Slow Calls",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 0,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": 0,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 10
+          },
+          "id": 6,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "app": "namenode",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "Hadoop_NameNode_TotalLoad{instance=~\"$server.*\", cluster=\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "dfs.FSNamesystem.TotalLoad",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "HDFS Total Load",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
       "title": "RPC Client Port Slow Calls & HDFS Total Load",
       "type": "row"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 17
-      },
-      "id": 5,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "rpc.rpc.client.RpcSlowCalls",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "RPC Client Port Slow Calls",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 0,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 17
-      },
-      "id": 6,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "app": "namenode",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "dfs.FSNamesystem.TotalLoad",
-          "precision": "default",
-          "refId": "A",
-          "templatedHost": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "HDFS Total Load",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 3
       },
       "id": 12,
       "panels": [],
@@ -740,7 +778,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Ambari Metrics",
+      "datasource": "Prometheus",
       "editable": true,
       "error": false,
       "fill": 0,
@@ -756,7 +794,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 25
+        "y": 4
       },
       "id": 7,
       "isNew": true,
@@ -787,10 +825,15 @@
           "app": "namenode",
           "downsampleAggregator": "avg",
           "errors": {},
+          "expr": "Hadoop_NameNode_add_block_avg_time{instance=~\"$server.*\", cluster=\"$cluster\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ instance }}",
           "metric": "rpcdetailed.rpcdetailed.client.AddBlockAvgTime",
           "precision": "default",
           "refId": "A",
-          "templatedHost": ""
+          "templatedHost": "sandbox-hdp.hortonworks.com",
+          "transform": "none"
         }
       ],
       "thresholds": [],
@@ -846,7 +889,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Ambari Metrics",
+      "datasource": "Prometheus",
       "editable": true,
       "error": false,
       "fill": 0,
@@ -862,7 +905,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 25
+        "y": 4
       },
       "id": 8,
       "isNew": true,
@@ -893,10 +936,14 @@
           "app": "namenode",
           "downsampleAggregator": "avg",
           "errors": {},
+          "expr": "Hadoop_NameNode_add_block_num_ops{instance=~\"$server.*\", cluster=\"$cluster\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ instance }}",
           "metric": "rpcdetailed.rpcdetailed.client.AddBlockNumOps",
           "precision": "default",
           "refId": "A",
-          "templatedHost": "",
+          "templatedHost": "sandbox-hdp.hortonworks.com",
           "transform": "rate"
         }
       ],
@@ -953,57 +1000,55 @@
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "hdfs",
-    "ams"
+    "prometheus",
+    "hdfs"
   ],
   "templating": {
     "list": [
       {
-        "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "namenode",
-          "value": "namenode"
+          "text": "hdp0002",
+          "value": "hdp0002"
         },
-        "datasource": "Ambari Metrics",
-        "hide": 1,
-        "hideLabel": true,
+        "datasource": "Prometheus",
+        "definition": "label_values(Hadoop_NameNode_FilesTotal, cluster)",
+        "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,
-        "multiFormat": "glob",
-        "name": "components",
-        "options": [
-          {
-            "selected": true,
-            "text": "namenode",
-            "value": "namenode"
-          }
-        ],
-        "query": "namenode",
-        "refresh": false,
+        "name": "cluster",
+        "options": [],
+        "query": "label_values(Hadoop_NameNode_FilesTotal, cluster)",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "All",
-          "value": ""
+          "text": "127.0.0.1",
+          "value": "127.0.0.1"
         },
-        "datasource": "Ambari Metrics",
-        "definition": "",
+        "datasource": "Prometheus",
+        "definition": "label_values(Hadoop_NameNode_FilesTotal{cluster=\"$cluster\"}, instance)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": null,
-        "multi": true,
+        "multi": false,
         "multiFormat": "glob",
-        "name": "hosts",
+        "name": "server",
         "options": [],
-        "query": "hosts",
+        "query": "label_values(Hadoop_NameNode_FilesTotal{cluster=\"$cluster\"}, instance)",
         "refresh": 1,
-        "regex": "",
+        "regex": "/(.*):.*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1046,6 +1091,6 @@
   },
   "timezone": "browser",
   "title": "HDFS - Home",
-  "uid": "jB2l4WzWz",
-  "version": 1
+  "uid": "LIzbkuZZk",
+  "version": 10
 }

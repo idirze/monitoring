@@ -1,15 +1,7 @@
 ---
-
 repo_url: http://10.168.0.45:8089/repository/raw-public/monitoring/prometheus
 prometheus_install_dir: /usr/its/monitoring/prometheus
 grafana_home: /usr/its/monitoring/grafana
-
-cluster:
-  hdp:
-    name: hdp0002
-  es:
-    name: es0003
-
 
 netdata_config:
   global:
@@ -20,7 +12,7 @@ netdata_config:
     /proc/net/snmp: "no"
     /proc/net/snmp6: "no"
 
-    # Configure alert manager
+# Configure alert manager
 prometheus_alertmanager_config:
 - scheme: http
   static_configs:
@@ -156,6 +148,9 @@ alertmanager_route:
   repeat_interval: 4h
   receiver: slack
 
+# Should we use the provisioning capability when possible (provisioning require grafana >= 5.0)
+grafana_use_provisioning: true
+
 # Grafana authentication         
 grafana_auth:
   anonymous:
@@ -163,8 +158,8 @@ grafana_auth:
     org_role: Viewer
 
 grafana_security:
-  admin_user: admin
-  admin_password: "admin"
+  admin_user: grafana
+  admin_password: "grafana"
 
 # Grafana datasources
 grafana_datasources:
@@ -175,14 +170,13 @@ grafana_datasources:
   isDefault: true
 
 - name: "Ambari Metrics"
-  type: "Ambari Metrics"
+  type: "praj-ams-datasource"
   access: proxy
-  url: "http://{{ ansible_host }}:9090"
+  url: "http://{{ ansible_host }}:6188"
 
 # Grafana plugins
 grafana_plugins:
 - "prajwalrao-ambari-metrics-grafana-1.0.1-1-gd429f53"
-
 
 grafana_dashboards:
 - { name: "Home",           folder: "home",         path: "dashboards/home",        orgId: 1}

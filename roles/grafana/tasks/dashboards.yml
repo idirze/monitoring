@@ -22,45 +22,31 @@
     - name: copy grafana all dashboard
       file:
         src: "{{ item.src }}"
-        dest: "{{ _tmp_dashboards.path }}/"
+        dest: "{{ _tmp_dashboards.path }}/{{ item.path | dirname }}/"
         state: hard
       when: item.state == 'file'
       with_filetree: 
       - "dashboards/"
 
-- name: Import grafana dashboards through API
-  uri:
-    url: "{{ grafana_api_url }}/api/dashboards/db"
-    user: "{{ grafana_security.admin_user }}"
-    password: "{{ grafana_security.admin_password }}"
-    force_basic_auth: true
-    method: POST
-    status_code: 200
-    body_format: json
-    body: >
-      {
-        "dashboard": {{ lookup("file", item) }},
-        "overwrite": true,
-        "message": "Updated by ansible"
-      }
-  no_log: false
-  with_fileglob:
-    - "{{ _tmp_dashboards.path }}/*.json"
-  when: not grafana_use_provisioning
-
-# TODO: uncomment this when ansible 2.7 will be min supported version
-# - name: import grafana dashboards
-#   grafana_dashboard:
-#     grafana_url: "{{ grafana_api_url }}"
-#     grafana_user: "{{ grafana_security.admin_user }}"
-#     grafana_password: "{{ grafana_security.admin_password }}"
-#     path: "/tmp/dashboards/{{ item }}"
-#     message: Updated by ansible
-#     state: present
-#     overwrite: true
-#   no_log: true
-#   with_fileglob:
-#     - "/tmp/dashboards/*"
+    - name: Import grafana dashboards through API
+      uri:
+        url: "{{ grafana_api_url }}/api/dashboards/db"
+        user: "{{ grafana_security.admin_user }}"
+        password: "{{ grafana_security.admin_password }}"
+        force_basic_auth: true
+        method: POST
+        status_code: 200
+        body_format: json
+        body: >
+          {
+            "dashboard": {{ lookup("file", item.src ) }},
+            "overwrite": true,
+            "message": "Updated by ansible"
+          }
+      when: item.state == 'file'
+      with_filetree:
+        - "{{ _tmp_dashboards.path }}/"
+      when: not grafana_use_provisioning
 
 - when: grafana_use_provisioning
   block:

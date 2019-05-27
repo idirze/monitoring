@@ -79,7 +79,7 @@
           then
              if ! [ `netstat -anp | grep LISTEN | egrep -o  ':{{ item.item.port }}\b' |  wc -l` == "1" ];
              then
-                export {{ item.item.opts }}="${{ item.item.opts }} -javaagent:{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar={{ item.item.port }}:{{ jmx_prometheus_javaagent_lib_dir }}/{{ item.item.service }}.yml"
+                export {{ item.item.opts }}="${{ item.item.opts }} -javaagent:{{ jmx_prometheus_javaagent_lib_dir }}/jmx_prometheus_javaagent-{{ jmx_prometheus_javaagent_version }}.jar={{ item.item.port }}:{{ jmx_prometheus_javaagent_lib_dir }}/{{ item.item.component }}.yml"
              fi
           fi
       with_items:

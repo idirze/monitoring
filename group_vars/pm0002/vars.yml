@@ -1,0 +1,6 @@
+---
+cluster:
+  hdp:
+    name: hdp0002
+  es:
+    name: es0003

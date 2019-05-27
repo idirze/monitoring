@@ -1,4 +1,5 @@
 ---
 lowercaseOutputLabelNames: true
 lowercaseOutputName: false
-attrNameSnakeCase: true
+whitelistObjectNames:
+- "*:*"

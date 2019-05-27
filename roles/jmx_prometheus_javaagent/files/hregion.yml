@@ -2,7 +2,8 @@
 lowercaseOutputLabelNames: true
 lowercaseOutputName: false
 
-whitelistObjectNames: ["Hadoop:*"]
+whitelistObjectNames: 
+- "Hadoop:*"
 rules:
   - pattern: "^Hadoop<service=HBase, name=(\\w+), sub=IPC><>(\\w+)"
     name: "hbase_ipc_$2"

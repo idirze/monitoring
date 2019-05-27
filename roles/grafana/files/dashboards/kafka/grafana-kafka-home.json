@@ -15,9 +15,10 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
+  "id": 53,
   "links": [
     {
-      "asDropdown": true,
+      "asDropdown": false,
       "icon": "external link",
       "keepTime": true,
       "tags": [
@@ -29,245 +30,470 @@
   ],
   "panels": [
     {
-      "collapsed": false,
+      "collapsed": true,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 17,
-      "panels": [],
-      "title": "Bytes / Messages",
+      "id": 26,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 28,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "FetchConsumer (min)",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "(kafka_network_RequestMetrics_TotalTimeMs{request=\"FetchConsumer\"})",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
+              "metric": "kafka.network.RequestMetrics.TotalTimeMs.request.FetchConsumer.min",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "FetchConsumer Total Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "ms",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 30,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "FetchFollower (min)",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "kafka_network_RequestMetrics_TotalTimeMs{request=\"FetchFollower\"}",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "FetchFollower",
+              "metric": "kafka.network.RequestMetrics.TotalTimeMs.request.FetchFollower.min",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "FetchFollower Total Time",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "ms",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 7
+          },
+          "id": 31,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "FetchFollower (min)",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "kafka_network_RequestMetrics_TotalTimeMs{request=\"OffsetCommit\"}",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "metric": "kafka.network.RequestMetrics.TotalTimeMs.request.FetchFollower.min",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "OffsetCommit Total Time",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "ms",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 7
+          },
+          "id": 32,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": false,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "FetchFollower (min)",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "kafka_network_RequestMetrics_TotalTimeMs{request=\"OffsetFetch\"}",
+              "format": "time_series",
+              "hosts": "",
+              "intervalFactor": 1,
+              "legendFormat": "",
+              "metric": "kafka.network.RequestMetrics.TotalTimeMs.request.FetchFollower.min",
+              "precision": "default",
+              "refId": "A",
+              "templatedHost": "",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "OffsetFetch Total Time",
+          "tooltip": {
+            "shared": false,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "ms",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Fetch Total Time",
       "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "id": 5,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "alias": "Bytes In",
-          "app": "kafka_broker",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "kafka.server.BrokerTopicMetrics.BytesInPerSec.count",
-          "precision": "default",
-          "refId": "A",
-          "transform": "none",
-          "transformData": "none"
-        },
-        {
-          "aggregator": "avg",
-          "alias": "Bytes Out",
-          "app": "kafka_broker",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "kafka.server.BrokerTopicMetrics.BytesOutPerSec.count",
-          "precision": "default",
-          "refId": "B",
-          "transform": "none",
-          "transformData": "none"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Bytes In & Out /s",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "bytes",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Ambari Metrics",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": null,
-        "rightLogBase": 1,
-        "rightMax": null,
-        "rightMin": null
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 6,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "aggregator": "avg",
-          "alias": "Messages In",
-          "app": "kafka_broker",
-          "downsampleAggregator": "avg",
-          "errors": {},
-          "metric": "kafka.server.BrokerTopicMetrics.MessagesInPerSec.count",
-          "precision": "default",
-          "refId": "A",
-          "transform": "none",
-          "transformData": "none"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Messages In /s",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "x-axis": true,
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "y-axis": true,
-      "y_formats": [
-        "short",
-        "short"
-      ],
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     },
     {
       "collapsed": true,
@@ -275,7 +501,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 1
       },
       "id": 18,
       "panels": [
@@ -288,7 +514,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "Ambari Metrics",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "format": "none",
@@ -303,12 +529,23 @@
             "h": 3,
             "w": 8,
             "x": 0,
-            "y": 9
+            "y": 2
           },
           "id": 2,
           "interval": null,
           "isNew": true,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
@@ -316,12 +553,20 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
               "aggregator": "avg",
@@ -329,10 +574,15 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_controller_KafkaController_ActiveControllerCount_Value",
+              "format": "time_series",
               "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "ActiveControllerCount",
               "metric": "kafka.controller.KafkaController.ActiveControllerCount",
               "precision": "default",
               "refId": "A",
+              "transform": "none",
               "transformData": "none"
             }
           ],
@@ -358,7 +608,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "Ambari Metrics",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "format": "none",
@@ -373,12 +623,23 @@
             "h": 3,
             "w": 8,
             "x": 8,
-            "y": 9
+            "y": 2
           },
           "id": 3,
           "interval": null,
           "isNew": true,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
@@ -386,12 +647,20 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
               "aggregator": "avg",
@@ -399,10 +668,15 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaFetcherManager_MaxLag",
+              "format": "time_series",
               "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "Replica MaxLag",
               "metric": "kafka.server.ReplicaFetcherManager.MaxLag.clientId.Replica",
               "precision": "default",
               "refId": "A",
+              "transform": "none",
               "transformData": "none"
             }
           ],
@@ -428,7 +702,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "Ambari Metrics",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "format": "none",
@@ -443,12 +717,23 @@
             "h": 3,
             "w": 8,
             "x": 16,
-            "y": 9
+            "y": 2
           },
           "id": 4,
           "interval": null,
           "isNew": true,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
@@ -456,12 +741,20 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": false,
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
               "aggregator": "avg",
@@ -469,10 +762,15 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaManager_LeaderCount",
+              "format": "time_series",
               "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "LeaderCount",
               "metric": "kafka.server.ReplicaManager.LeaderCount",
               "precision": "default",
               "refId": "A",
+              "transform": "none",
               "transformData": "none"
             }
           ],
@@ -499,7 +797,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 2
       },
       "id": 19,
       "panels": [
@@ -512,7 +810,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "Ambari Metrics",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "format": "none",
@@ -525,14 +823,25 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 12,
+            "w": 8,
             "x": 0,
-            "y": 10
+            "y": 3
           },
           "id": 13,
           "interval": null,
           "isNew": true,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
@@ -540,12 +849,20 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": true,
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
           "targets": [
             {
               "aggregator": "avg",
@@ -553,9 +870,13 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaManager_UnderReplicatedPartitions",
+              "format": "time_series",
+              "intervalFactor": 1,
               "metric": "kafka.server.ReplicaManager.UnderReplicatedPartitions",
               "precision": "default",
               "refId": "A",
+              "transform": "none",
               "transformData": "none"
             }
           ],
@@ -581,7 +902,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "Ambari Metrics",
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "format": "none",
@@ -594,14 +915,25 @@
           },
           "gridPos": {
             "h": 3,
-            "w": 12,
-            "x": 12,
-            "y": 10
+            "w": 9,
+            "x": 8,
+            "y": 3
           },
-          "id": 14,
+          "id": 24,
           "interval": null,
           "isNew": true,
           "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
           "maxDataPoints": 100,
           "nullPointMode": "connected",
           "nullText": null,
@@ -609,12 +941,113 @@
           "postfixFontSize": "50%",
           "prefix": "",
           "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
             "full": true,
             "lineColor": "rgb(31, 120, 193)",
             "show": true
           },
+          "tableColumn": "",
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "UnderReplicatedPartitions",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "kafka_server_ReplicaManager_PartitionCount",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "PartitionCount",
+              "metric": "kafka.server.ReplicaManager.UnderReplicatedPartitions",
+              "precision": "default",
+              "refId": "A",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": "",
+          "title": "PartitionCount",
+          "type": "singlestat",
+          "valueFontSize": "80%",
+          "valueMaps": [
+            {
+              "op": "=",
+              "text": "N/A",
+              "value": "null"
+            }
+          ],
+          "valueName": "current"
+        },
+        {
+          "cacheTimeout": null,
+          "colorBackground": false,
+          "colorValue": false,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "format": "none",
+          "gauge": {
+            "maxValue": 100,
+            "minValue": 0,
+            "show": false,
+            "thresholdLabels": false,
+            "thresholdMarkers": true
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 7,
+            "x": 17,
+            "y": 3
+          },
+          "id": 14,
+          "interval": null,
+          "isNew": true,
+          "links": [],
+          "mappingType": 1,
+          "mappingTypes": [
+            {
+              "name": "value to text",
+              "value": 1
+            },
+            {
+              "name": "range to text",
+              "value": 2
+            }
+          ],
+          "maxDataPoints": 100,
+          "nullPointMode": "connected",
+          "nullText": null,
+          "postfix": "",
+          "postfixFontSize": "50%",
+          "prefix": "",
+          "prefixFontSize": "50%",
+          "rangeMaps": [
+            {
+              "from": "null",
+              "text": "N/A",
+              "to": "null"
+            }
+          ],
+          "sparkline": {
+            "fillColor": "rgba(31, 118, 189, 0.18)",
+            "full": true,
+            "lineColor": "rgb(31, 120, 193)",
+            "show": true
+          },
+          "tableColumn": "",
           "targets": [
             {
               "aggregator": "avg",
@@ -622,9 +1055,14 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_controller_KafkaController_OfflinePartitionsCount_Value",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "OfflinePartitionsCount",
               "metric": "kafka.controller.KafkaController.OfflinePartitionsCount",
               "precision": "default",
               "refId": "A",
+              "transform": "none",
               "transformData": "none"
             }
           ],
@@ -651,14 +1089,16 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 3
       },
       "id": 20,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -674,7 +1114,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 11
+            "y": 4
           },
           "id": 7,
           "isNew": true,
@@ -696,6 +1136,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -705,6 +1146,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_network_RequestMetrics_Requests_total{request=\"Produce\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Produce Requests",
               "metric": "kafka.network.RequestMetrics.RequestsPerSec.request.Produce.count",
               "precision": "default",
               "refId": "A",
@@ -714,17 +1159,23 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Produce Requests /s",
           "tooltip": {
             "msResolution": false,
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "y-axis": true,
           "y_formats": [
@@ -748,12 +1199,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -769,7 +1226,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 11
+            "y": 4
           },
           "id": 8,
           "isNew": true,
@@ -791,6 +1248,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -800,6 +1258,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_network_RequestMetrics_Requests_total{request=\"FetchConsumer\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Consumer Requests",
               "metric": "kafka.network.RequestMetrics.RequestsPerSec.request.FetchConsumer.count",
               "precision": "default",
               "refId": "A",
@@ -809,17 +1271,23 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Consumer Requests /s",
           "tooltip": {
             "msResolution": false,
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "y-axis": true,
           "y_formats": [
@@ -843,10 +1311,126 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 33,
+          "isNew": true,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "aggregator": "avg",
+              "alias": "Consumer Requests",
+              "app": "kafka_broker",
+              "downsampleAggregator": "avg",
+              "errors": {},
+              "expr": "kafka_network_RequestMetrics_TotalTimeMs{request=\"Produce\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Consumer Requests",
+              "metric": "kafka.network.RequestMetrics.RequestsPerSec.request.FetchConsumer.count",
+              "precision": "default",
+              "refId": "A",
+              "transform": "none",
+              "transformData": "none"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Produce Total Time",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "yaxes": [
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "ms",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
-      "title": "Producer & Consumer Requests",
+      "title": "Producer/Consumer Requests & Total Time",
       "type": "row"
     },
     {
@@ -855,14 +1439,16 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 4
       },
       "id": 21,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -878,7 +1464,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 12
+            "y": 4
           },
           "id": 9,
           "isNew": true,
@@ -900,6 +1486,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -909,6 +1496,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_controller_ControllerStats_LeaderElectionRateAndTimeMs_Count",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Leader Election Rate",
               "metric": "kafka.controller.ControllerStats.LeaderElectionRateAndTimeMs.count",
               "precision": "default",
               "refId": "A",
@@ -918,24 +1509,57 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Leader Election Rate",
           "tooltip": {
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
           "y-axis": true,
           "y_formats": [
             "short",
             "short"
-          ]
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -951,7 +1575,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 12
+            "y": 4
           },
           "id": 10,
           "isNew": true,
@@ -973,6 +1597,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -982,6 +1607,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_controller_ControllerStats_UncleanLeaderElections_total",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "Unclean Leader Elections",
               "metric": "kafka.controller.ControllerStats.UncleanLeaderElectionsPerSec.count",
               "precision": "default",
               "refId": "A",
@@ -991,19 +1620,50 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Unclean Leader Elections",
           "tooltip": {
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
           "y-axis": true,
           "y_formats": [
             "short",
             "short"
-          ]
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Leader Election & Unclean Leader Elections",
@@ -1015,14 +1675,16 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 5
       },
       "id": 22,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1038,7 +1700,7 @@
             "h": 7,
             "w": 12,
             "x": 0,
-            "y": 13
+            "y": 6
           },
           "id": 11,
           "isNew": true,
@@ -1060,6 +1722,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1069,6 +1732,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaManager_IsrShrinks_total",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "ISR Shrinks",
               "metric": "kafka.server.ReplicaManager.IsrShrinksPerSec.count",
               "precision": "default",
               "refId": "A",
@@ -1078,24 +1745,57 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "In-Sync Replica Shrinks /s",
           "tooltip": {
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
           "y-axis": true,
           "y_formats": [
             "short",
             "short"
-          ]
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1111,7 +1811,7 @@
             "h": 7,
             "w": 12,
             "x": 12,
-            "y": 13
+            "y": 6
           },
           "id": 12,
           "isNew": true,
@@ -1134,6 +1834,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1143,6 +1844,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaManager_IsrExpands_total",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "ISR Expands",
               "metric": "kafka.server.ReplicaManager.IsrExpandsPerSec.count",
               "precision": "default",
               "refId": "A",
@@ -1152,19 +1857,50 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "In-Sync Replica Expands /s",
           "tooltip": {
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
           "y-axis": true,
           "y_formats": [
             "short",
             "short"
-          ]
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "In-Sync Replica Shrinks / Expanded",
@@ -1176,14 +1912,16 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 6
       },
       "id": 23,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1199,7 +1937,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 14
+            "y": 7
           },
           "id": 16,
           "isNew": true,
@@ -1221,6 +1959,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1230,6 +1969,10 @@
               "app": "kafka_broker",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "kafka_server_ReplicaFetcherManager_MaxLag",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "MaxLag",
               "metric": "kafka.server.ReplicaFetcherManager.MaxLag.clientId.Replica",
               "precision": "default",
               "refId": "A",
@@ -1239,19 +1982,50 @@
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Replica Fetcher Manager MaxLag",
           "tooltip": {
             "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "x-axis": true,
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
           "y-axis": true,
           "y_formats": [
             "short",
             "short"
-          ]
+          ],
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Replica Fetcher Manager",
@@ -1261,14 +2035,14 @@
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "kafka",
-    "ams"
+    "prometheus",
+    "kafka"
   ],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1299,6 +2073,7 @@
   },
   "timezone": "browser",
   "title": "Kafka - Home",
-  "uid": "6P2lVZkWz",
-  "version": 1
+  "uid": "extOMuZWk",
+  "version": 20
 }
+

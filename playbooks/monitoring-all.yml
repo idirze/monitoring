@@ -1,0 +1,17 @@
+---
+- hosts: all
+  vars_files:
+    - ../group_vars/common.yml
+    - ../group_vars/{{ inventory_dir | basename }}/vars.yml
+    - ../group_vars/{{ inventory_dir | basename }}/vault
+  roles:
+  - roles/prometheus
+  - roles/alertmanager
+  - roles/pushgateway
+  - roles/node-exporter
+  - roles/elasticsearch-exporter
+  - roles/grafana
+  - roles/jmx_prometheus_javaagent
+
+
+

@@ -14,13 +14,14 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
-  "iteration": 1555869116751,
+  "graphTooltip": 1,
+  "id": 50,
+  "iteration": 1558814268145,
   "links": [
     {
-      "asDropdown": true,
+      "asDropdown": false,
       "icon": "external link",
-      "keepTime": true,
+      "keepTime": false,
       "tags": [
         "hdfs"
       ],
@@ -42,7 +43,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -61,7 +64,7 @@
             "hideEmpty": true,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
             "values": false
           },
@@ -74,6 +77,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -82,25 +86,35 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "rate(hadoop_DataNode_blocks_written{instance=~\"$server.*\", cluster=~\"$cluster\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.BlocksWritten",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Blocks Written",
           "tooltip": {
             "msResolution": false,
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -117,12 +131,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -141,7 +161,7 @@
             "hideEmpty": true,
             "max": false,
             "min": false,
-            "show": false,
+            "show": true,
             "total": false,
             "values": false
           },
@@ -154,6 +174,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -162,25 +183,35 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "rate(hadoop_DataNode_blocks_read{instance=~\"$server.*\", cluster=~\"$cluster\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.BlocksRead",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Blocks Read",
           "tooltip": {
             "msResolution": false,
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -197,7 +228,11 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Blocks Written / Read",
@@ -216,7 +251,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -248,6 +285,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -256,31 +294,42 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "avg(hadoop_DataNode_fsync_nanos_avg_time{instance=~\"$server.*\", cluster=~\"$cluster\"})",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.FsyncNanosAvgTime",
               "precision": "default",
               "refId": "A",
-              "templatedHost": ""
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Fsync Time",
           "tooltip": {
             "msResolution": false,
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
               "format": "ns",
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -290,12 +339,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -327,6 +382,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -335,25 +391,35 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "avg(hadoop_DataNode_fsync_nanos_num_ops{instance=~\"$server.*\", cluster=~\"$cluster\"})",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.FsyncNanosNumOps",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Fsync Num Ops",
           "tooltip": {
             "msResolution": false,
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -370,7 +436,11 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Fsync Time / Num Ops",
@@ -389,7 +459,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -421,6 +493,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -429,30 +502,42 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_send_data_packet_blocked_on_network_nanos_avg_time{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.SendDataPacketBlockedOnNetworkNanosAvgTime",
               "precision": "default",
               "refId": "A",
-              "templatedHost": ""
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Data Packet Blocked Time",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
               "format": "ns",
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -462,12 +547,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -499,6 +590,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -507,24 +599,33 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_send_data_packet_blocked_on_network_nanos_num_ops{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
               "metric": "dfs.datanode.SendDataPacketBlockedOnNetworkNanosNumOps",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Data Packet Blocked Num Ops",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -541,7 +642,11 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Data Packets Blocked / Num Ops",
@@ -560,7 +665,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -592,6 +699,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -600,30 +708,41 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_send_data_packet_transfer_nanos_avg_time{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.SendDataPacketTransferNanosAvgTime",
               "precision": "default",
               "refId": "A",
-              "templatedHost": ""
+              "templatedHost": "sandbox-hdp.hortonworks.com",
+              "transform": "none"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Packet Transfer Time",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
               "format": "ns",
               "logBase": 1,
               "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
@@ -633,12 +752,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -652,11 +777,14 @@
           "id": 10,
           "isNew": true,
           "legend": {
+            "alignAsTable": false,
             "avg": false,
             "current": false,
-            "hideEmpty": true,
+            "hideEmpty": false,
+            "hideZero": false,
             "max": false,
             "min": false,
+            "rightSide": false,
             "show": false,
             "total": false,
             "values": false
@@ -670,6 +798,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -678,24 +807,34 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_send_data_packet_transfer_nanos_num_ops{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.SendDataPacketTransferNanosNumOps",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Packet Transfer Num Ops",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -712,7 +851,11 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Packet Transfer Blocked / Num Ops",
@@ -731,7 +874,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -762,6 +907,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -771,24 +917,34 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_packet_ack_round_trip_time_nanos_avg_time{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.PacketAckRoundTripTimeNanosAvgTime",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "none"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Packet Ack Round Trip Time",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -805,12 +961,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -842,6 +1004,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -851,24 +1014,34 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_packet_ack_round_trip_time_nanos_num_ops{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.PacketAckRoundTripTimeNanosNumOps",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "diff"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Packet Round Trip Num Ops",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -885,7 +1058,11 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Packet Round Trip",
@@ -904,7 +1081,9 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -936,6 +1115,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -944,24 +1124,34 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "hadoop_DataNode_datanode_network_errors{instance=~\"$server.*\", cluster=~\"$cluster\"}",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "legendFormat": "{{ instance }}",
               "metric": "dfs.datanode.DatanodeNetworkErrors",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "Network Errors",
           "tooltip": {
             "shared": false,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -978,12 +1168,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         },
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "Ambari Metrics",
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
           "editable": true,
           "error": false,
           "fill": 0,
@@ -1007,7 +1203,7 @@
             "values": false
           },
           "lines": true,
-          "linewidth": 2,
+          "linewidth": 1,
           "links": [],
           "nullPointMode": "connected",
           "percentage": false,
@@ -1015,6 +1211,7 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
+          "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1023,24 +1220,35 @@
               "app": "datanode",
               "downsampleAggregator": "avg",
               "errors": {},
+              "expr": "irate(hadoop_DataNode_gc_count{instance=~\"$server.*\", cluster=~\"$cluster\"}[1m])",
+              "format": "time_series",
+              "instant": false,
+              "intervalFactor": 2,
+              "legendFormat": "{{ instance }}",
               "metric": "jvm.JvmMetrics.GcCount",
               "precision": "default",
               "refId": "A",
-              "templatedHost": "",
+              "templatedHost": "sandbox-hdp.hortonworks.com",
               "transform": "rate"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
+          "timeRegions": [],
           "timeShift": null,
           "title": "GC Count",
           "tooltip": {
-            "shared": false,
+            "shared": true,
+            "sort": 0,
             "value_type": "cumulative"
           },
           "type": "graph",
           "xaxis": {
-            "show": true
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
           },
           "yaxes": [
             {
@@ -1057,14 +1265,18 @@
               "min": null,
               "show": true
             }
-          ]
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
       "title": "Network Errors / GC Count",
       "type": "row"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1072,226 +1284,257 @@
         "y": 6
       },
       "id": 23,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "Ambari Metrics",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {},
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 7
-          },
-          "id": 12,
-          "isNew": true,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "hideEmpty": true,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "aggregator": "avg",
-              "app": "datanode",
-              "downsampleAggregator": "avg",
-              "errors": {},
-              "metric": "jvm.JvmMetrics.GcTimeMillis",
-              "precision": "default",
-              "refId": "A",
-              "templatedHost": "",
-              "transform": "rate"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "GC Time",
-          "tooltip": {
-            "shared": false,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "Ambari Metrics",
-          "editable": true,
-          "error": false,
-          "fill": 0,
-          "grid": {},
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 7
-          },
-          "id": 13,
-          "isNew": true,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "hideEmpty": true,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "aggregator": "avg",
-              "app": "datanode",
-              "downsampleAggregator": "avg",
-              "errors": {},
-              "metric": "jvm.JvmMetrics.GcTimeMillisParNew",
-              "precision": "default",
-              "refId": "A",
-              "templatedHost": "",
-              "transform": "rate"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "GC Time ParNew",
-          "tooltip": {
-            "shared": false,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "xaxis": {
-            "show": true
-          },
-          "yaxes": [
-            {
-              "format": "ms",
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
+      "panels": [],
       "title": "GC Time / GC Time ParNew",
       "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 12,
+      "isNew": true,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideEmpty": true,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "avg",
+          "app": "datanode",
+          "downsampleAggregator": "avg",
+          "errors": {},
+          "expr": "increase(hadoop_DataNode_gc_time_millis{instance=~\"$server.*\", cluster=~\"$cluster\"}[1m])",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ instance }}",
+          "metric": "jvm.JvmMetrics.GcTimeMillis",
+          "precision": "default",
+          "refId": "A",
+          "templatedHost": "sandbox-hdp.hortonworks.com",
+          "transform": "rate"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "GC Time",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "ms",
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "editable": true,
+      "error": false,
+      "fill": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 13,
+      "isNew": true,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "hideEmpty": true,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aggregator": "avg",
+          "app": "datanode",
+          "downsampleAggregator": "avg",
+          "errors": {},
+          "expr": "increase(hadoop_DataNode_gc_time_millis_par_new{instance=~\"$server.*\", cluster=~\"$cluster\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{ instance }}",
+          "metric": "jvm.JvmMetrics.GcTimeMillisParNew",
+          "precision": "default",
+          "refId": "A",
+          "templatedHost": "sandbox-hdp.hortonworks.com",
+          "transform": "rate"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "GC Time ParNew",
+      "tooltip": {
+        "shared": false,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "ms",
+          "logBase": 1,
+          "max": null,
+          "min": 0,
+          "show": true
+        },
+        {
+          "format": "short",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
   "schemaVersion": 16,
   "style": "dark",
   "tags": [
-    "hdfs",
-    "ams"
+    "prometheus",
+    "hdfs"
   ],
   "templating": {
     "list": [
       {
-        "allFormat": "glob",
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "datanode",
-          "value": "datanode"
+          "text": "hdp0002",
+          "value": "hdp0002"
         },
-        "datasource": "Ambari Metrics",
-        "hide": 1,
-        "hideLabel": true,
+        "datasource": "Prometheus",
+        "definition": "label_values(hadoop_DataNode_data_port, cluster)",
+        "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,
-        "multiFormat": "glob",
-        "name": "components",
-        "options": [
-          {
-            "selected": true,
-            "text": "datanode",
-            "value": "datanode"
-          }
-        ],
-        "query": "datanode",
-        "refresh": 0,
+        "name": "cluster",
+        "options": [],
+        "query": "label_values(hadoop_DataNode_data_port, cluster)",
+        "refresh": 1,
+        "regex": "",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       },
       {
         "allFormat": "glob",
-        "allValue": null,
+        "allValue": ".*",
         "current": {
-          "text": "All",
-          "value": ""
+          "text": "127.0.0.1",
+          "value": "127.0.0.1"
         },
-        "datasource": "Ambari Metrics",
-        "definition": "",
+        "datasource": "Prometheus",
+        "definition": "label_values(hadoop_DataNode_data_port{cluster=\"$cluster\"}, instance)",
         "hide": 0,
         "includeAll": true,
         "label": null,
-        "multi": true,
+        "multi": false,
         "multiFormat": "glob",
-        "name": "hosts",
+        "name": "server",
         "options": [],
-        "query": "hosts",
+        "query": "label_values(hadoop_DataNode_data_port{cluster=\"$cluster\"}, instance)",
         "refresh": 1,
-        "regex": "",
+        "regex": "/(.*):.*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -1334,6 +1577,6 @@
   },
   "timezone": "browser",
   "title": "HDFS - DataNodes",
-  "uid": "dPGlVZkWk",
-  "version": 1
+  "uid": "7T0bvUWZk",
+  "version": 34
 }

@@ -6,5 +6,3 @@
 --driver-memory 512m  \
 --conf spark.metrics.conf=/var/lib/spark2-metrics/spark-metrics.properties    \
 --executor-memory 512m     --executor-cores 1     examples/jars/spark-examples*.jar 10
-
-

@@ -1,0 +1,19 @@
+
+
+- name: Update admin password
+  uri:
+    url: "{{ grafana_api_url }}/{{ grafana_security.admin_user }}/password"
+    user: "{{ grafana_security.admin_user }}"
+    password: "{{ grafana_security.admin_password }}"
+    force_basic_auth: true
+    method: POST
+    status_code: 200
+    body_format: json
+    body: >
+      {
+        "oldPassword": "admin",
+        "newPassword": "admin",
+        "confirmNew": "admin2"
+      }
+
+      
