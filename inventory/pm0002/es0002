@@ -1,8 +1,10 @@
 #node1 ansible_host=10.0.1.10
 node1 ansible_host=127.0.0.1 ansible_port=2222 ansible_user=root ansible_ssh_pass=izitounene
-#node3 ansible_host=10.0.1.12
+node2 ansible_host=10.0.1.12
 
 [all]
 node1
 
-
+[grp2]
+node2
+node1
